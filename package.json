@@ -1,0 +1,20 @@
+{
+  "name": "unit-9-node-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^2.3.0",
+    "cheerio": "^0.19.0",
+    "express": "^4.12.4",
+    "mocha": "^2.2.5",
+    "nodemon": "^1.11.0",
+    "request": "^2.55.0",
+    "supertest": "^1.0.1"
+  }
+}
