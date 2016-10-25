@@ -4,11 +4,15 @@ const request = require('request');
 const Factual = require('factual-api');
 const factual = new Factual('Jr4VU8j7IWGNP3P8tg2x21WVC58Opn0w7Zr5EUeo', 'rYkYbju3AROrBb3E4HM9PriEsCfrgzXvoTaQNJet');
 
-const scrapeController = {
+const funController = {
   getData: (req, res, next) => {
     switch (req.url) {
       case '/chill': findPlaces(res, [338, 333]); break;
-      case '/buffet': findPlaces(res, [350]); break;
+      case '/landmarks': findPlaces(res, [107]); break;
+      case '/gardens': findPlaces(res, [109]); break;
+      case '/natural': findPlaces(res, [112]); break;
+      case '/beaches': findPlaces(res, [113]); break;
+      case '/forests': findPlaces(res, [115]); break;
       default:
         res.writeHead(404, { 'Content-Type': 'text/html' });
         res.write('Error 404. "' + req.url + '" not found.');
@@ -29,7 +33,7 @@ function findPlaces(res, codes) {
   });
   Promise.all(vows)
     .then((factualRes) => {
-      const pickOne = Math.floor(Math.random() * 20);
+      const pickOne = Math.floor(Math.random() * factualRes[0].data.length);
       console.log(factualRes.map(datum => { return datum.data[pickOne].name }))
       return factualRes.map(datum => {
         let toReturn = '';
@@ -50,4 +54,4 @@ function findPlaces(res, codes) {
     });
 }
 
-module.exports = scrapeController;
+module.exports = funController;
