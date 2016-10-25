@@ -21,7 +21,8 @@ function findPlaces(res, codes) {
   const vows = codes.map(code => {
     const oath = new Promise((resolve, reject) => {
       factual.get('/t/places-us', { filters: { "$and": [{ locality: "los angeles", category_ids: { "$includes": code } }] } }, function (error, factualRes) {
-        resolve(factualRes);
+        if (!error) resolve(factualRes);
+        else reject(error);
       });
     });
     return oath;
@@ -41,6 +42,10 @@ function findPlaces(res, codes) {
       const jsonObj = JSON.stringify(results);
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.write(jsonObj);
+      res.end();
+    }).catch(err => {
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      res.write("Coudn't find anything.");
       res.end();
     });
 }
