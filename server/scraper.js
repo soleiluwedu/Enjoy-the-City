@@ -19,8 +19,8 @@ const scrapeController = {
       Promise.all(vows)
         .then((factualRes) => {
           const pickOne = Math.random() * 20;
-          console.log(factualRes.map(datum => { return datum.data[pickOne].name }))
-          return factualRes.map(datum => { return datum.data[pickOne].name })//+ ' in ' + datum.data[pickOne].neighborhood[0] });
+          console.log(factualRes.map(datum => { return datum.data[0].name }))
+          return factualRes.map(datum => { return datum.data[0].name })//+ ' in ' + datum.data[pickOne].neighborhood[0] });
         })
         .then((results) => {
           const jsonObj = JSON.stringify(results);
