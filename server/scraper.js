@@ -1,11 +1,46 @@
 'use strict';
-
 const cheerio = require('cheerio');
 const request = require('request');
+const Factual = require('factual-api');
+const factual = new Factual('Jr4VU8j7IWGNP3P8tg2x21WVC58Opn0w7Zr5EUeo', 'rYkYbju3AROrBb3E4HM9PriEsCfrgzXvoTaQNJet');
+
 
 const scrapeController = {
   getData: (req, res, next) => {
-    if (req.url === "/") {
+    if (req.url === "/entertainment") {
+      const oath = new Promise((resolve, reject) => {
+        factual.get('/t/places-us', {filters:{"$and":[{locality:"los angeles", category_ids:{"$includes":317}},{category_ids:{"$excludes":318}}]}}, function (error, factualRes) {
+          if (!error) resolve(factualRes);
+          else reject(error);
+        });
+      });
+      oath.then(factualRes => {
+        // console.log("show " + factualRes.included_rows + "/" + factualRes.total_row_count + " rows:", factualRes.data);
+        console.log("Places returned:", factualRes.included_rows);
+        const jsonObj = JSON.stringify(factualRes);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.write(jsonObj);
+        res.end();
+      }).catch(err => { console.log(err) });
+    }
+    if (req.url === "/shows") {
+      const oath = new Promise((resolve, reject) => {
+        factual.get('/t/places-us', {filters:{"$and":[{locality:"los angeles", category_ids:{"$includes":333}},{category_ids:{"$excludes":318}}]}}, function (error, factualRes) {
+          if (!error) resolve(factualRes);
+          else reject(error);
+        });
+      });
+      oath.then(factualRes => {
+        // console.log("show " + factualRes.included_rows + "/" + factualRes.total_row_count + " rows:", factualRes.data);
+        console.log("Places returned:", factualRes.included_rows);
+        const jsonObj = JSON.stringify(factualRes);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.write(jsonObj);
+        res.end();
+      }).catch(err => { console.log(err) });
+    }
+
+    if (req.url === "/cs") {
       request('http://codesmith.io', (error, response, html) => {
         if (!error && response.statusCode === 200) {
           const $ = cheerio.load(html);
@@ -24,7 +59,7 @@ const scrapeController = {
     if (req.url === "/hr") {
       const options = {
         url: 'http://www.hackreactor.com',
-        headers: {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0'}
+        headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0' }
       };
       request(options, (error, response, html) => {
         if (!error) {
@@ -35,17 +70,17 @@ const scrapeController = {
           obj["title"] = title;
           obj["date"] = date;
           const hrefToFollow = $('.main-nav__list li:first-child').find('a').attr('href');
-          var oath = new Promise(function (resolve, reject) {
-            var options2 = {
+          const oath = new Promise((resolve, reject) => {
+            const hrOptions = {
               url: options.url + hrefToFollow,
-              headers: {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0'}
+              headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0' }
             };
-            request(options2, (error, response, html) => {
+            request(hrOptions, (error, response, html) => {
               if (!error) resolve(html);
               else reject(error);
             });
           });
-          oath.then(function (html) {
+          oath.then(html => {
             const $ = cheerio.load(html);
             const tuition = $('.cost').text();
             obj["tuition"] = tuition;
@@ -53,7 +88,7 @@ const scrapeController = {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.write(jsonObj);
             res.end();
-          }).catch(function (err) {console.log("Error: " + err);});
+          }).catch(err => { console.log("Error:", err) });
         }
       });
     }
