@@ -12,19 +12,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', scraperController.getData);
-app.get('/chill', scraperController.getData);
-app.get('/shows', scraperController.getData);
-app.get('/dining', scraperController.getData);
-app.get('/movies', scraperController.getData);
-app.get('/entertainment', scraperController.getData);
-app.get('/cs', scraperController.getData);
-app.get('/hr', scraperController.getData);
-app.get('*', (req, res, next) => {
-  res.writeHead(404, { 'Content-Type': 'text/html' });
-  res.write('Error 404. "' + req.url + '" not found.');
-  res.end();
-});
+app.get('*', scraperController.getData);
+
 app.listen(3000);
 
 module.exports = app;
