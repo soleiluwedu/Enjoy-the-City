@@ -7,7 +7,7 @@ const factual = new Factual('Jr4VU8j7IWGNP3P8tg2x21WVC58Opn0w7Zr5EUeo', 'rYkYbju
 const scrapeController = {
   getData: (req, res, next) => {
     if (req.url === "/chill") {
-      const codes = [338, 333, 333];
+      const codes = [338, 333];
       const vows = codes.map(code => {
         let oath = new Promise((resolve, reject) => {
           factual.get('/t/places-us', { filters: { "$and": [{ locality: "los angeles", category_ids: { "$includes": code } }] } }, function (error, factualRes) {
@@ -18,9 +18,9 @@ const scrapeController = {
       });
       Promise.all(vows)
         .then((factualRes) => {
-          const pickOne = Math.random() * 20;
-          console.log(factualRes.map(datum => { return datum.data[0].name }))
-          return factualRes.map(datum => { return datum.data[0].name })//+ ' in ' + datum.data[pickOne].neighborhood[0] });
+          const pickOne = Math.floor(Math.random() * 20);
+          console.log(factualRes.map(datum => { return datum.data[pickOne].name }))
+          return factualRes.map(datum => { return datum.data[pickOne].name + ' in ' + datum.data[pickOne].neighborhood[0] });
         })
         .then((results) => {
           const jsonObj = JSON.stringify(results);
