@@ -13,7 +13,10 @@ app.use((req, res, next) => {
 });
 
 app.get('/', scraperController.getData);
+app.get('/chill', scraperController.getData);
 app.get('/shows', scraperController.getData);
+app.get('/dining', scraperController.getData);
+app.get('/movies', scraperController.getData);
 app.get('/entertainment', scraperController.getData);
 app.get('/cs', scraperController.getData);
 app.get('/hr', scraperController.getData);
