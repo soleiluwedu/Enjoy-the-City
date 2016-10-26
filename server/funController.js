@@ -1,5 +1,4 @@
 'use strict';
-const cheerio = require('cheerio');
 const request = require('request');
 const Factual = require('factual-api');
 const factual = new Factual('Jr4VU8j7IWGNP3P8tg2x21WVC58Opn0w7Zr5EUeo', 'rYkYbju3AROrBb3E4HM9PriEsCfrgzXvoTaQNJet');
@@ -7,8 +6,8 @@ const factual = new Factual('Jr4VU8j7IWGNP3P8tg2x21WVC58Opn0w7Zr5EUeo', 'rYkYbju
 const funController = {
   getData: (req, res, next) => {
     switch (req.url) {
-      case '/firstdate': findPlaces(res, [139, 463]); break; // Costumes, Arcade
-        
+      case '/firstdate': findPlaces(res, [139, 463, 362]); break; // Costumes, Arcade, Middle Eastern food
+      
       case '/landmark': findPlaces(res, [107]); break;
       case '/garden': findPlaces(res, [109]); break;
       case '/natural': findPlaces(res, [112]); break;
