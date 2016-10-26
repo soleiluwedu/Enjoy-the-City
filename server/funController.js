@@ -7,7 +7,8 @@ const factual = new Factual('Jr4VU8j7IWGNP3P8tg2x21WVC58Opn0w7Zr5EUeo', 'rYkYbju
 const funController = {
   getData: (req, res, next) => {
     switch (req.url) {
-      case '/chill': findPlaces(res, [338, 333]); break;
+      case '/firstdate': findPlaces(res, [342, 463]); break; // Cafe, Arcade
+        
       case '/landmark': findPlaces(res, [107]); break;
       case '/garden': findPlaces(res, [109]); break;
       case '/natural': findPlaces(res, [112]); break;
@@ -52,6 +53,7 @@ const funController = {
       case '/show': findPlaces(res, [333]); break;
       case '/nightclub': findPlaces(res, [334]); break;
       case '/psychic': findPlaces(res, [336]); break;
+      case '/dining': findPlaces(res, [338]); break;
       case '/brewery': findPlaces(res, [341]); break;
       case '/cafe': findPlaces(res, [342]); break;
       case '/dessert': findPlaces(res, [343]); break;
