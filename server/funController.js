@@ -12,25 +12,45 @@ const funController = {
       // Cafe, Skating
       case '/firstdate': findPlaces(res, [
         [342, 'First date is a crazy-check. Start with a cafe.'],
-        [402, 'If it goes well, how about skating?']
+        Math.ceil(Math.random() * 2) % 2 === 1
+          ? [402, 'If it goes well, how about skating?']
+          : [463, 'If it goes well, how about the arcade?']
       ]); break;
       // Costumes, Arcade, Middle Eastern restaurant
       case '/seconddate': findPlaces(res, [
-        [139, 'Try on some costumes.'],
-        [463, 'Go to an arcade.'],
-        [362, 'Relax with some Middle Eastern cuisine.']
+        Math.ceil(Math.random() * 2) % 2 === 1
+          ? [139, 'Try on some costumes.']
+          : [336, 'See a psychic together.'],
+        Math.ceil(Math.random() * 2) % 2 === 1
+          ? [311, 'Visit a museum.']
+          : [331, 'Go mini-golfing.'],
+        Math.ceil(Math.random() * 2) % 2 === 1
+          ? [362, 'Relax with some Middle Eastern cuisine.']
+          : [359, 'Have some Japanese.']
       ]); break;
       // Italian restaurant, Show, Wine Bar
       case '/thirddate': findPlaces(res, [
-        [358, 'Let\'s start with dinner at an Italian restaurant'],
-        [333, 'Go see a show.'],
-        [316, 'Talk about it over wine.']
+        Math.ceil(Math.random() * 2) % 2 === 1
+          ? [358, 'Let\'s start with dinner at an Italian restaurant.']
+          : [364, 'Let\'s start with dinner at a seafood restaurant.'],
+        Math.ceil(Math.random() * 2) % 2 === 1
+          ? [333, 'Go see a show.']
+          : [330, 'Sing karaoke and embarrass yourself.'],
+        Math.ceil(Math.random() * 2) % 2 === 1
+          ? [316, 'Talk about it over wine.']
+          : [313, 'Relax and talk to each other at a lounge.']
       ]); break;
       // Mini Golf, Seafood restaurant, Art Gallery
       case '/fourthdate': findPlaces(res, [
-        [331, 'Start with mini-golf.'],
-        [364, 'Enjoy some seafood.'],
-        [310, 'Explore an art gallery together.']
+        Math.ceil(Math.random() * 2) % 2 === 1
+          ? [311, 'Start the day at a museum.']
+          : [331, 'Start with mini-golf.'],
+        Math.ceil(Math.random() * 2) % 2 === 1
+          ? [364, 'Enjoy some seafood.']
+          : [366, 'Enjoy sushi.'],
+        Math.ceil(Math.random() * 2) % 2 === 1
+          ? [282, 'Get massages together.']
+          : [148, 'Maybe flowers are in order.']
       ]); break;
       // Horseback Riding, French restaurant, Dessert
       case '/fifthdate': findPlaces(res, [

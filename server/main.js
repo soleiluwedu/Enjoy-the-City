@@ -44,7 +44,7 @@ makeButtons([
     ['nomeat', 'Not Craving meat'],
     ['largegroup', 'Large Group'],
     ['nightout', 'Night Out'],
-    ['learn', 'Learn Something'],
+    ['learn', 'Learn'],
     ['allday', 'Whole Day Affair'],
     ['nogoingback', 'No Going Back'],
     ['nature', 'Nature'],
