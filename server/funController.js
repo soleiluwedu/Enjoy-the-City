@@ -10,9 +10,9 @@ const funController = {
     console.log("POST received. params =", req.params)
     switch (req.url) {
       // Cafe, Skating
-      case '/firstdate': findPlaces(res, [342, 402]); break;
+      case '/firstdate': findPlaces(res, [[342, 'First date is a crazy-check. Start with a cafe.'], [402, 'If it goes well, how about skating?']]); break;
       // Costumes, Arcade, Middle Eastern restaurant
-      case '/seconddate': findPlaces(res, [139, 463, 362]); break;
+      case '/seconddate': findPlaces(res, [[139, 'Try on some costumes.'], [463, 'Then go to an arcade.'], [362, 'Then relax with some Middle Eastern cuisine.']]); break;
       // Italian restaurant, Show, Wine Bar
       case '/thirddate': findPlaces(res, [358, 333, 316]); break;
       // Mini Golf, Seafood restaurant, Art Gallery
@@ -122,8 +122,8 @@ const funController = {
 function findPlaces(res, codes) {
   const vows = codes.map(code => {
     const oath = new Promise((resolve, reject) => {
-      factual.get('/t/places-us', { filters: { "$and": [{ locality: "los angeles", category_ids: { "$includes": code } }] } }, function (error, factualRes) {
-        if (!error) resolve(factualRes);
+      factual.get('/t/places-us', { filters: { "$and": [{ locality: "los angeles", category_ids: { "$includes": code[0] } }] } }, function (error, factualRes) {
+        if (!error) resolve([factualRes, code[1]]);
         else reject(error);
       });
     });
@@ -131,13 +131,13 @@ function findPlaces(res, codes) {
   });
   Promise.all(vows)
     .then((factualRes) => {
-      return factualRes.map(datum => {
-        const pickOne = Math.floor(Math.random() * datum.data.length);
+      return factualRes.map(pair => {
+        const pickOne = Math.floor(Math.random() * pair[0].data.length);
         let toLog = '';
-        toLog += datum.data[pickOne].name;
-        toLog += datum.data[pickOne].neighborhood ? ' in ' + datum.data[pickOne].neighborhood[0] : '';
+        toLog += pair[0].data[pickOne].name;
+        toLog += pair[0].data[pickOne].neighborhood ? ' in ' + pair[0].data[pickOne].neighborhood[0] : '';
         console.log(toLog);
-        return datum.data[pickOne];
+        return [pair[0].data[pickOne], pair[1]];
       });
     })
     .then((results) => {
@@ -147,7 +147,7 @@ function findPlaces(res, codes) {
     }).catch(err => {
       console.log(err);
       res.writeHead(500, { 'Content-Type': 'text/html' });
-      // res.write("No data found.");
+      res.write("No data found.");
       res.end();
     });
 }

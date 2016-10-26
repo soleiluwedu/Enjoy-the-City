@@ -42,19 +42,29 @@ function showPlaces(results) {
     if (document.getElementById('places')) document.getElementById('places').remove();
     const placesDiv = document.createElement('div');
     placesDiv.id = "places";
-    results.forEach(place => {
+    results.forEach(pair => {
         const entry = document.createElement('p');
+        const desc = document.createElement('span');
+        desc.className = 'desc';
+        desc.textContent = pair[1];
+        entry.appendChild(desc);
+        entry.innerHTML += '<br>';
         const name = document.createElement('span');
         name.className = 'name';
-        name.textContent = place.name;
+        name.textContent = pair[0].name;
         entry.appendChild(name);
-        if (place.neighborhood) {
+        if (pair[0].neighborhood) {
             const neighborhood = document.createElement('span');
             neighborhood.className = 'neighborhood';
-            neighborhood.textContent = place.neighborhood[0];
+            neighborhood.textContent = pair[0].neighborhood[0];
             entry.innerHTML += ' in ';
             entry.appendChild(neighborhood);
         }
+        entry.innerHTML += '<br>';
+        const address = document.createElement('span');
+        address.className = 'address';
+        address.textContent = pair[0].address + ", " + pair[0].locality + ", " + pair[0].region + " " + pair[0].postcode;
+        entry.appendChild(address);
         placesDiv.appendChild(entry);
         document.getElementById('main').appendChild(placesDiv);
     });

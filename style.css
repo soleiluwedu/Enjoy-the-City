@@ -1,23 +1,21 @@
 html {
     margin: 0;
-    background-color: #cc99cc;
+    background-color: #336699;
     font-family: Arial;
 }
 
-#title {
-    margin-left: auto;
-    margin-right: auto
-}
-
-.btn {
-    margin-left: auto;
-    margin-right: auto
+.desc {
+    color: #ffaa99
 }
 
 .name {
-    color: #0066cc
+    color: #99ccff
 }
 
 .neighborhood {
-    color: #cc6600;
+    color: #ff9900;
+}
+
+.address {
+    color: #33cc99
 }
