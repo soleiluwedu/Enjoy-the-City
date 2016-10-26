@@ -40,7 +40,7 @@ const funController = {
       ]); break;
       // Hotel
       case '/goingwell': findPlaces(res, [
-        [436, 'Date is going well?']
+        [436, 'Is the date going well?']
       ]); break;
       // BBQ, Steak
       case '/meat': findPlaces(res, [
@@ -59,13 +59,30 @@ const funController = {
         [334, 'Have a night out at the club.'],
         [318, 'End it with some late night entertainment.']
       ]); break;
-      // Martial Arts
-      case '/martialarts': findPlaces(res, [
-        [377, 'Learn a martial art.']
+      // Learn
+      case '/learn': findPlaces(res, [
+        [377, 'Train in a martial art.'],
+        [311, 'Visit a museum.']
+
       ]); break;
-      // Winery
-      case '/winery': findPlaces(res, [
-        [370, 'Spend the day at a winery.']
+      // All Day
+      case '/allday': findPlaces(res, [
+        [370, 'Take a trip to the winery.'],
+        [152, 'Have some cheese with that wine.'],
+        [451, 'Air it out on the golf course.'],
+        [285, 'Treat your body well at the spa.'],
+        [389, 'Explore a trail.']
+      ]); break;
+      // Piercings, Tattooes
+      case '/nogoingback': findPlaces(res, [
+        [283, 'Get a body piercing.'],
+        [287, 'Put ink on your body.']
+      ]); break;
+        // Garden, Natural, Beach, Park
+      case '/nature': findPlaces(res, [
+        [109, 'Stroll the gardens.'],
+        [113, 'Get tanned at the beach.'],
+        [118, 'Relax at the park.']
       ]); break;
 
       case '/landmark': findPlaces(res, [107]); break;

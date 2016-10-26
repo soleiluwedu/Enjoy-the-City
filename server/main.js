@@ -43,8 +43,10 @@ makeButtons([
     ['meat', 'Craving Meat'],
     ['largegroup', 'Large Group'],
     ['nightout', 'Night Out'],
-    ['martialarts', 'Martial Arts'],
-    ['winery', 'Winery']
+    ['learn', 'Learn Something'],
+    ['allday', 'Spend The Whole Day Out'],
+    ['nogoingback', 'No Going Back'],
+    ['nature', 'Nature']
 ]);
 
 function sendPosition(pos) {
