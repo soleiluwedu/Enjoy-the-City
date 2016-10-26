@@ -1,7 +1,7 @@
 'use strict';
 
 const title = document.createElement('h1');
-title.textContent = 'Where To Go?';
+title.textContent = 'Life is Short. Don\'t Waste It.';
 title.id = 'title';
 document.getElementById('top').appendChild(title);
 

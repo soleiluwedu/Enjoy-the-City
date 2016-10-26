@@ -11,7 +11,7 @@ const funController = {
     switch (req.url) {
       // Cafe, Skating
       case '/firstdate': findPlaces(res, [
-        [342, 'First date is a crazy-check. Start with a cafe.'],
+        [342, 'First date is the crazy-check. Start with a cafe.'],
         Math.ceil(Math.random() * 2) % 2 === 1
           ? [402, 'If it goes well, how about skating?']
           : [463, 'If it goes well, how about the arcade?']
