@@ -11,7 +11,7 @@ document.getElementById('main').appendChild(allbtns);
 
 function makeButtons(array) {
     for (let i = 0; i < array.length; i++) {
-        let btnCreated = document.createElement('button');
+        const btnCreated = document.createElement('button');
         btnCreated.textContent = array[i][1];
         btnCreated.className = 'btn';
         btnCreated.id = array[i][0];
@@ -20,9 +20,9 @@ function makeButtons(array) {
             if (document.getElementById('places')) document.getElementById('places').remove();
             const loading = document.createElement('p');
             loading.id = 'loading';
-            loading.textContent = 'Loading data...';
+            loading.textContent = 'Downloading data...';
             document.getElementById('main').appendChild(loading);
-            let xmlhttp = new XMLHttpRequest();
+            const xmlhttp = new XMLHttpRequest();
             xmlhttp.open("POST", "/" + array[i][0]);
             xmlhttp.setRequestHeader("Content-type", "text/html");
             xmlhttp.onload = () => { showPlaces(JSON.parse(xmlhttp.responseText)) };
@@ -55,7 +55,7 @@ function sendPosition(pos) {
     const lat = pos.coords.latitude;
     const long = pos.coords.longitutde;
     console.log("Location obtained from Google Maps API. Sending position object:", pos)
-    let xmlhttp = new XMLHttpRequest();
+    const xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", { url: "/firstdate", lat: lat, long: long });
     xmlhttp.setRequestHeader("Content-type", "application/json");
     xmlhttp.onLoad = (results) => { showPlaces(results) }
