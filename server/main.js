@@ -32,18 +32,20 @@ function sendPosition(pos) {
 }
 
 function error(err) {
-  console.warn('ERROR (Code: ' + err.code + '): ' + err.message);
+    console.warn('ERROR (Code: ' + err.code + '): ' + err.message);
 };
 
 
 function showPlaces(results) {
-  console.log("showPlaces. results =", results)
-  if (document.getElementById('places')) document.getElementById('places').remove();
-  const placesDiv = document.createElement('div');
-  placesDiv.id = "places";
-  results.forEach(place => {
-    const entry = document.createElement('p');
-    entry.textContent = place.name + place.neighborhood ? place.neighborhood[0] : '';
-    placesDiv.appendChild(entry);
-  });
+    console.log("showPlaces. results =", results)
+    if (document.getElementById('places')) document.getElementById('places').remove();
+    const placesDiv = document.createElement('div');
+    placesDiv.id = "places";
+    results.forEach(place => {
+        const entry = document.createElement('p');
+        entry.textContent = place.name;
+        entry.textContent += place.neighborhood ? ' in ' + place.neighborhood[0] : '';
+        placesDiv.appendChild(entry);
+        document.getElementById('main').appendChild(placesDiv);
+    });
 }
