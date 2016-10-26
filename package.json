@@ -9,12 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chai": "^2.3.0",
     "express": "^4.12.4",
     "factual-api": "^1.0.7",
-    "mocha": "^2.2.5",
     "nodemon": "^1.11.0",
-    "request": "^2.55.0",
-    "supertest": "^1.0.1"
+    "request": "^2.55.0"
   }
 }
