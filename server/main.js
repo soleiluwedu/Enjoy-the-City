@@ -26,7 +26,7 @@ function makeButtons(array) {
             if (document.getElementById('places')) document.getElementById('places').remove();
             const loading = document.createElement('p');
             loading.id = 'loading';
-            loading.textContent = 'Downloading data...';
+            loading.textContent = '⏱ Downloading data...';
             document.getElementById('main').appendChild(loading);
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.open("POST", "/" + array[i][0]);

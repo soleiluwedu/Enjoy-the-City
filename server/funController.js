@@ -7,7 +7,7 @@ const funController = {
 
   },
   postData: (req, res) => {
-    console.log("POST received. params =", req.params)
+    console.log("✉️ POST request received for", req.url)
     switch (req.url) {
       // Cafe, Skating
       case '/firstdate': findPlaces(res, [
