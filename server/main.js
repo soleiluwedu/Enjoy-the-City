@@ -5,7 +5,13 @@ title.textContent = 'Where To Go?';
 title.id = 'title';
 document.getElementById('top').appendChild(title);
 
-const allbtns = document.createElement('span');
+const pic = document.createElement('img');
+pic.id = 'pic';
+pic.src = "ferris.jpg";
+pic.height = "200";
+document.getElementById('top').appendChild(pic);
+
+const allbtns = document.createElement('div');
 allbtns.id = 'allbtns'
 document.getElementById('main').appendChild(allbtns);
 

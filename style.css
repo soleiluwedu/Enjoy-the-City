@@ -10,8 +10,32 @@ html {
     color: #cccccc
 }
 
+#pic {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+#places {
+    width: 28%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#allbtns {
+    display: block;
+    margin: auto;
+}
+
 #loading {
-    color: #cccccc
+    color: #cccccc;
+    width: 50%;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .desc {
