@@ -39,8 +39,12 @@ makeButtons([
     ['thirddate', 'Third Date'],
     ['fourthdate', 'Fourth Date'],
     ['fifthdate', 'Fifth Date'],
-    ['goingwell', 'Date Going Well?'],
-    ['meat', 'Craving Meat?']
+    ['goingwell', 'Date Going Well'],
+    ['meat', 'Craving Meat'],
+    ['largegroup', 'Large Group'],
+    ['nightout', 'Night Out'],
+    ['martialarts', 'Martial Arts'],
+    ['winery', 'Winery']
 ]);
 
 function sendPosition(pos) {
@@ -57,7 +61,6 @@ function sendPosition(pos) {
 function error(err) {
     console.warn('ERROR (Code: ' + err.code + '): ' + err.message);
 };
-
 
 function showPlaces(results) {
     console.log("showPlaces. results =", results)

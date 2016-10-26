@@ -42,12 +42,31 @@ const funController = {
       case '/goingwell': findPlaces(res, [
         [436, 'Date is going well?']
       ]); break;
-      // Steak
+      // BBQ, Steak
       case '/meat': findPlaces(res, [
-        [365, 'Get some protein.']
+        [349, 'Go to a BBQ joint.'],
+        [365, 'Or have a nice steak.']
       ]); break;
-      // Beach or Park or Lounge or Art Gallery
-      case '/largegroup': findPlaces(res, [113, 118, 313, 310]); break;
+      // Beach or Park or Lounge or Resort
+      case '/largegroup': findPlaces(res, [
+        [113, 'How about the beach?'],
+        [118, 'Or maybe the park?'],
+        [313, 'Maybe chill at a lounge.'],
+        [438, 'Or everyone can chip in for a stay at a resort.']
+      ]); break;
+      // Nightclub, Adult
+      case '/nightout': findPlaces(res, [
+        [334, 'Have a night out at the club.'],
+        [318, 'End it with some late night entertainment.']
+      ]); break;
+      // Martial Arts
+      case '/martialarts': findPlaces(res, [
+        [377, 'Learn a martial art.']
+      ]); break;
+      // Winery
+      case '/winery': findPlaces(res, [
+        [370, 'Spend the day at a winery.']
+      ]); break;
 
       case '/landmark': findPlaces(res, [107]); break;
       case '/garden': findPlaces(res, [109]); break;
