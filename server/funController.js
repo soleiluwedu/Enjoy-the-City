@@ -7,7 +7,7 @@ const factual = new Factual('Jr4VU8j7IWGNP3P8tg2x21WVC58Opn0w7Zr5EUeo', 'rYkYbju
 const funController = {
   getData: (req, res, next) => {
     switch (req.url) {
-      case '/firstdate': findPlaces(res, [342, 463]); break; // Cafe, Arcade
+      case '/firstdate': findPlaces(res, [139, 463]); break; // Costumes, Arcade
         
       case '/landmark': findPlaces(res, [107]); break;
       case '/garden': findPlaces(res, [109]); break;
@@ -53,7 +53,6 @@ const funController = {
       case '/show': findPlaces(res, [333]); break;
       case '/nightclub': findPlaces(res, [334]); break;
       case '/psychic': findPlaces(res, [336]); break;
-      case '/dining': findPlaces(res, [338]); break;
       case '/brewery': findPlaces(res, [341]); break;
       case '/cafe': findPlaces(res, [342]); break;
       case '/dessert': findPlaces(res, [343]); break;
@@ -115,8 +114,14 @@ function findPlaces(res, codes) {
   });
   Promise.all(vows)
     .then((factualRes) => {
-      const pickOne = Math.floor(Math.random() * factualRes[0].data.length);
-      return factualRes[0].data[pickOne];
+      return factualRes.map(datum => {
+        const pickOne = Math.floor(Math.random() * datum.data.length);
+        let toLog = '';
+        toLog += datum.data[pickOne].name;
+        toLog += datum.data[pickOne].neighborhood ? ' in ' + datum.data[pickOne].neighborhood[0] : '';
+        console.log(toLog);
+        return datum.data[pickOne];
+      });
     })
     .then((results) => {
       const jsonObj = JSON.stringify(results);
