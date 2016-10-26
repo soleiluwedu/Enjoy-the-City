@@ -28,16 +28,24 @@ const funController = {
       ]); break;
       // Mini Golf, Seafood restaurant, Art Gallery
       case '/fourthdate': findPlaces(res, [
-        [331, 'Start with Mini-Golf.'],
+        [331, 'Start with mini-golf.'],
         [364, 'Enjoy some seafood.'],
         [310, 'Explore an art gallery together.']
       ]); break;
       // Horseback Riding, French restaurant, Dessert
-      case '/fifthdate': findPlaces(res, [380, 356, 343]); break;
+      case '/fifthdate': findPlaces(res, [
+        [380, 'Go horseback riding.'],
+        [356, 'Dine at a French restaurant.'],
+        [343, 'If this person made it to a fifth date, he/she deserves dessert.']
+      ]); break;
       // Hotel
-      case '/goingwell': findPlaces([436]); break;
+      case '/goingwell': findPlaces(res, [
+        [436, 'Date is going well?']
+      ]); break;
       // Steak
-      case '/needmeat': findPlaces([365]); break;
+      case '/meat': findPlaces(res, [
+        [365, 'Get some protein.']
+      ]); break;
       // Beach or Park or Lounge or Art Gallery
       case '/largegroup': findPlaces(res, [113, 118, 313, 310]); break;
 

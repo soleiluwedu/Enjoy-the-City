@@ -5,7 +5,12 @@ html {
 }
 
 #title {
-    text-align: center
+    text-align: center;
+    color: #cccccc
+}
+
+#loading {
+    color: #cccccc
 }
 
 #allbtns {
@@ -20,7 +25,7 @@ html {
 }
 
 .neighborhood {
-    color: #ff9900;
+    color: #ff9900
 }
 
 .address {

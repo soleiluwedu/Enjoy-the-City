@@ -16,6 +16,12 @@ function makeButtons(array) {
         btnCreated.className = 'btn';
         btnCreated.id = array[i][0];
         btnCreated.addEventListener("click", (e) => {
+            if (document.getElementById('loading')) document.getElementById('loading').remove();
+            if (document.getElementById('places')) document.getElementById('places').remove();
+            const loading = document.createElement('p');
+            loading.id = 'loading';
+            loading.textContent = 'Loading data...';
+            document.getElementById('main').appendChild(loading);
             let xmlhttp = new XMLHttpRequest();
             xmlhttp.open("POST", "/" + array[i][0]);
             xmlhttp.setRequestHeader("Content-type", "text/html");
@@ -31,7 +37,10 @@ makeButtons([
     ['firstdate', 'First Date'],
     ['seconddate', 'Second Date'],
     ['thirddate', 'Third Date'],
-    ['fourthdate', 'Fourth Date']
+    ['fourthdate', 'Fourth Date'],
+    ['fifthdate', 'Fifth Date'],
+    ['goingwell', 'Date Going Well?'],
+    ['meat', 'Craving Meat?']
 ]);
 
 function sendPosition(pos) {
@@ -52,6 +61,7 @@ function error(err) {
 
 function showPlaces(results) {
     console.log("showPlaces. results =", results)
+    if (document.getElementById('loading')) document.getElementById('loading').remove();
     if (document.getElementById('places')) document.getElementById('places').remove();
     const placesDiv = document.createElement('div');
     placesDiv.id = "places";
