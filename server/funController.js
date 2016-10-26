@@ -10,13 +10,28 @@ const funController = {
     console.log("POST received. params =", req.params)
     switch (req.url) {
       // Cafe, Skating
-      case '/firstdate': findPlaces(res, [[342, 'First date is a crazy-check. Start with a cafe.'], [402, 'If it goes well, how about skating?']]); break;
+      case '/firstdate': findPlaces(res, [
+          [342, 'First date is a crazy-check. Start with a cafe.'],
+          [402, 'If it goes well, how about skating?']
+        ]); break;
       // Costumes, Arcade, Middle Eastern restaurant
-      case '/seconddate': findPlaces(res, [[139, 'Try on some costumes.'], [463, 'Then go to an arcade.'], [362, 'Then relax with some Middle Eastern cuisine.']]); break;
+      case '/seconddate': findPlaces(res, [
+        [139, 'Try on some costumes.'],
+        [463, 'Go to an arcade.'],
+        [362, 'Relax with some Middle Eastern cuisine.']
+      ]); break;
       // Italian restaurant, Show, Wine Bar
-      case '/thirddate': findPlaces(res, [358, 333, 316]); break;
+      case '/thirddate': findPlaces(res, [
+        [358, 'Let\'s start with dinner at an Italian restaurant'],
+        [333, 'Go see a show.'],
+        [316, 'Talk about it over wine.']
+      ]); break;
       // Mini Golf, Seafood restaurant, Art Gallery
-      case '/fourthdate': findPlaces(res, [331, 364, 310]); break;
+      case '/fourthdate': findPlaces(res, [
+        [331, 'Start with Mini-Golf.'],
+        [364, 'Enjoy some seafood.'],
+        [310, 'Explore an art gallery together.']
+      ]); break;
       // Horseback Riding, French restaurant, Dessert
       case '/fifthdate': findPlaces(res, [380, 356, 343]); break;
       // Hotel

@@ -5,21 +5,34 @@ title.textContent = 'Where To Go?';
 title.id = 'title';
 document.getElementById('top').appendChild(title);
 
+const allbtns = document.createElement('span');
+allbtns.id = 'allbtns'
+document.getElementById('main').appendChild(allbtns);
 
-const btn = document.createElement('button');
-btn.textContent = 'First Date';
-btn.className = 'btn';
-btn.id = 'firstdate';
-btn.addEventListener("click", (e) => {
-    let xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "/firstdate");
-    xmlhttp.setRequestHeader("Content-type", "text/html");
-    xmlhttp.onload = () => { showPlaces(JSON.parse(xmlhttp.responseText)) };
-    xmlhttp.send();
-    // console.log("Retrieving location from Google Maps API to send...");
-    // navigator.geolocation.getCurrentPosition(sendPosition, error);
-});
-document.getElementById('main').appendChild(btn);
+function makeButtons(array) {
+    for (let i = 0; i < array.length; i++) {
+        let btnCreated = document.createElement('button');
+        btnCreated.textContent = array[i][1];
+        btnCreated.className = 'btn';
+        btnCreated.id = array[i][0];
+        btnCreated.addEventListener("click", (e) => {
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/" + array[i][0]);
+            xmlhttp.setRequestHeader("Content-type", "text/html");
+            xmlhttp.onload = () => { showPlaces(JSON.parse(xmlhttp.responseText)) };
+            xmlhttp.send();
+            // console.log("Retrieving location from Google Maps API to send...");
+            // navigator.geolocation.getCurrentPosition(sendPosition, error);
+        });
+        document.getElementById('allbtns').appendChild(btnCreated);
+    }
+}
+makeButtons([
+    ['firstdate', 'First Date'],
+    ['seconddate', 'Second Date'],
+    ['thirddate', 'Third Date'],
+    ['fourthdate', 'Fourth Date']
+]);
 
 function sendPosition(pos) {
     const lat = pos.coords.latitude;

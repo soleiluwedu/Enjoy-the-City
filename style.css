@@ -4,6 +4,13 @@ html {
     font-family: Arial;
 }
 
+#title {
+    text-align: center
+}
+
+#allbtns {
+    
+}
 .desc {
     color: #ffaa99
 }

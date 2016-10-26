@@ -9,8 +9,7 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-app.use(express.static(path.join(__dirname, '../' ))); //serves the index.html
-// app.get('*', funController.getData);
+app.use(express.static(path.join(__dirname, '../' )));
 app.post('*', funController.postData);
 app.listen(3000);
 module.exports = app;
