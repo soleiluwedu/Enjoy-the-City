@@ -3,3 +3,21 @@ html {
     background-color: #cc99cc;
     font-family: Arial;
 }
+
+#title {
+    margin-left: auto;
+    margin-right: auto
+}
+
+.btn {
+    margin-left: auto;
+    margin-right: auto
+}
+
+.name {
+    color: #0066cc
+}
+
+.neighborhood {
+    color: #cc6600;
+}

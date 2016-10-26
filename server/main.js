@@ -1,14 +1,15 @@
 'use strict';
 
 const title = document.createElement('h1');
-title.textContent = 'Things To Do.';
-title.className = 'title';
+title.textContent = 'Where To Go?';
+title.id = 'title';
 document.getElementById('top').appendChild(title);
 
 
 const btn = document.createElement('button');
-btn.textContent = 'Find Something To Do';
+btn.textContent = 'First Date';
 btn.className = 'btn';
+btn.id = 'firstdate';
 btn.addEventListener("click", (e) => {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "/firstdate");
@@ -43,8 +44,17 @@ function showPlaces(results) {
     placesDiv.id = "places";
     results.forEach(place => {
         const entry = document.createElement('p');
-        entry.textContent = place.name;
-        entry.textContent += place.neighborhood ? ' in ' + place.neighborhood[0] : '';
+        const name = document.createElement('span');
+        name.className = 'name';
+        name.textContent = place.name;
+        entry.appendChild(name);
+        if (place.neighborhood) {
+            const neighborhood = document.createElement('span');
+            neighborhood.className = 'neighborhood';
+            neighborhood.textContent = place.neighborhood[0];
+            entry.innerHTML += ' in ';
+            entry.appendChild(neighborhood);
+        }
         placesDiv.appendChild(entry);
         document.getElementById('main').appendChild(placesDiv);
     });
