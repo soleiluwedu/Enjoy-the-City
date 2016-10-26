@@ -114,13 +114,7 @@ function findPlaces(res, codes) {
   Promise.all(vows)
     .then((factualRes) => {
       const pickOne = Math.floor(Math.random() * factualRes[0].data.length);
-      console.log(factualRes.map(datum => { return datum.data[pickOne].name }))
-      return factualRes.map(datum => {
-        let toReturn = '';
-        toReturn += datum.data[pickOne].name
-        toReturn += datum.data[pickOne].neighborhood ? ' in ' + datum.data[pickOne].neighborhood[0] : ''
-        return toReturn;
-      });
+      return factualRes[0].data[pickOne];
     })
     .then((results) => {
       const jsonObj = JSON.stringify(results);
@@ -129,7 +123,7 @@ function findPlaces(res, codes) {
       res.end();
     }).catch(err => {
       res.writeHead(400, { 'Content-Type': 'text/html' });
-      res.write("Couldn't find anything.");
+      res.write("No data.");
       res.end();
     });
 }
