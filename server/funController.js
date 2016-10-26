@@ -6,8 +6,23 @@ const factual = new Factual('Jr4VU8j7IWGNP3P8tg2x21WVC58Opn0w7Zr5EUeo', 'rYkYbju
 const funController = {
   getData: (req, res, next) => {
     switch (req.url) {
-      case '/firstdate': findPlaces(res, [139, 463, 362]); break; // Costumes, Arcade, Middle Eastern food
-      
+      // Cafe, Skating
+      case '/firstdate': findPlaces(res, [342, 402]); break;
+      // Costumes, Arcade, Middle Eastern restaurant
+      case '/seconddate': findPlaces(res, [139, 463, 362]); break;
+      // Italian restaurant, Show, Wine Bar
+      case '/thirddate': findPlaces(res, [358, 333, 316]); break;
+      // Mini Golf, Seafood restaurant, Art Gallery
+      case '/fourthdate': findPlaces(res, [331, 364, 310]); break;
+      // Horseback Riding, French restaurant, Dessert
+      case '/fifthdate': findPlaces(res, [380, 356, 343]); break;
+      // Hotel
+      case '/goingwell': findPlaces([436]); break;
+      // Steak
+      case '/needmeat': findPlaces([365]); break;
+      // Beach or Park or Lounge
+      case '/largegroup': findPlaces(res, [113, 118, 313]); break;
+
       case '/landmark': findPlaces(res, [107]); break;
       case '/garden': findPlaces(res, [109]); break;
       case '/natural': findPlaces(res, [112]); break;
