@@ -2,13 +2,12 @@
 const request = require('request');
 const Factual = require('factual-api');
 const factual = new Factual('Jr4VU8j7IWGNP3P8tg2x21WVC58Opn0w7Zr5EUeo', 'rYkYbju3AROrBb3E4HM9PriEsCfrgzXvoTaQNJet');
-const showPlaces = require('./showPlaces')
 const funController = {
   getData: (req, res) => {
 
   },
   postData: (req, res) => {
-    console.log("POST received", req)
+    console.log("POST received. params =", req.params)
     switch (req.url) {
       // Cafe, Skating
       case '/firstdate': findPlaces(res, [342, 402]); break;
@@ -142,13 +141,13 @@ function findPlaces(res, codes) {
       });
     })
     .then((results) => {
-      showPlaces(results);
-      // res.writeHead(200, { 'Content-Type': 'application/json' });
-      // res.write(JSON.stringify(results));
-      // res.end();
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.write(JSON.stringify(results));
+      res.end();
     }).catch(err => {
+      console.log(err);
       res.writeHead(500, { 'Content-Type': 'text/html' });
-      res.write("No data found.");
+      // res.write("No data found.");
       res.end();
     });
 }
