@@ -11,6 +11,7 @@
   "dependencies": {
     "express": "^4.12.4",
     "factual-api": "^1.0.7",
+    "jquery": "^3.1.1",
     "nodemon": "^1.11.0",
     "request": "^2.55.0"
   }
