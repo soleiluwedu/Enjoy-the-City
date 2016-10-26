@@ -41,7 +41,7 @@ makeButtons([
     ['fifthdate', 'Fifth Date'],
     ['goingwell', 'Date Going Well'],
     ['meat', 'Craving Meat'],
-    ['nomeat', 'Not Craving meat'],
+    ['nomeat', 'Not Craving Meat'],
     ['largegroup', 'Large Group'],
     ['nightout', 'Night Out'],
     ['learn', 'Learn'],
