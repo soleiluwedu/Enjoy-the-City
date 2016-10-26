@@ -54,8 +54,12 @@ const funController = {
       ]); break;
       // Horseback Riding, French restaurant, Dessert
       case '/fifthdate': findPlaces(res, [
-        [380, 'Go horseback riding.'],
-        [356, 'Dine at a French restaurant.'],
+        Math.ceil(Math.random() * 2) % 2 === 1
+          ? [389, 'Go hiking.']
+          : [380, 'Go horseback riding.'],
+        Math.ceil(Math.random() * 2) % 2 === 1
+          ? [356, 'Dine at a French restaurant.']
+          : [414, 'Take a yoga class together.'],
         [343, 'If this person made it to a fifth date, he/she deserves dessert.']
       ]); break;
       // Hotel
