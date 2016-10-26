@@ -20,8 +20,8 @@ const funController = {
       case '/goingwell': findPlaces([436]); break;
       // Steak
       case '/needmeat': findPlaces([365]); break;
-      // Beach or Park or Lounge
-      case '/largegroup': findPlaces(res, [113, 118, 313]); break;
+      // Beach or Park or Lounge or Art Gallery
+      case '/largegroup': findPlaces(res, [113, 118, 313, 310]); break;
 
       case '/landmark': findPlaces(res, [107]); break;
       case '/garden': findPlaces(res, [109]); break;
@@ -138,13 +138,12 @@ function findPlaces(res, codes) {
       });
     })
     .then((results) => {
-      const jsonObj = JSON.stringify(results);
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.write(jsonObj);
+      res.write(JSON.stringify(results));
       res.end();
     }).catch(err => {
-      res.writeHead(400, { 'Content-Type': 'text/html' });
-      res.write("No data.");
+      res.writeHead(500, { 'Content-Type': 'text/html' });
+      res.write("No data found.");
       res.end();
     });
 }
