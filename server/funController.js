@@ -11,9 +11,9 @@ const funController = {
     switch (req.url) {
       // Cafe, Skating
       case '/firstdate': findPlaces(res, [
-          [342, 'First date is a crazy-check. Start with a cafe.'],
-          [402, 'If it goes well, how about skating?']
-        ]); break;
+        [342, 'First date is a crazy-check. Start with a cafe.'],
+        [402, 'If it goes well, how about skating?']
+      ]); break;
       // Costumes, Arcade, Middle Eastern restaurant
       case '/seconddate': findPlaces(res, [
         [139, 'Try on some costumes.'],
@@ -47,25 +47,31 @@ const funController = {
         [349, 'Go to a BBQ joint.'],
         [365, 'Or have a nice steak.']
       ]); break;
+      // Vegan / vegetarian
+      case '/nomeat': findPlaces(res, [
+        [368, 'Would rather toss a salad than eat meat.']
+      ]); break;
       // Beach or Park or Lounge or Resort
       case '/largegroup': findPlaces(res, [
         [113, 'How about the beach?'],
         [118, 'Or maybe the park?'],
         [313, 'Maybe chill at a lounge.'],
-        [438, 'Or everyone can chip in for a stay at a resort.']
+        [332, 'Don\'t feel like talking to everyone? See a movie.']
       ]); break;
-      // Nightclub, Adult
+      // Nightclub, Jazz, Adult
       case '/nightout': findPlaces(res, [
         [334, 'Have a night out at the club.'],
+        [314, 'Let the jazz take over your ears.'],
         [318, 'End it with some late night entertainment.']
       ]); break;
-      // Learn
+      // Martial arts, Museum, Psychic
       case '/learn': findPlaces(res, [
         [377, 'Train in a martial art.'],
-        [311, 'Visit a museum.']
+        [311, 'Visit a museum.'],
+        [336, 'Find out your fortune.']
 
       ]); break;
-      // All Day
+      // Winery, Cheese, Golf course, Spa, Hiking
       case '/allday': findPlaces(res, [
         [370, 'Take a trip to the winery.'],
         [152, 'Have some cheese with that wine.'],
@@ -78,11 +84,23 @@ const funController = {
         [283, 'Get a body piercing.'],
         [287, 'Put ink on your body.']
       ]); break;
-        // Garden, Natural, Beach, Park
+      // Garden, Natural, Beach, Park
       case '/nature': findPlaces(res, [
         [109, 'Stroll the gardens.'],
         [113, 'Get tanned at the beach.'],
         [118, 'Relax at the park.']
+      ]); break;
+      // Candy, Dessert, Ice Cream
+      case '/sweettooth': findPlaces(res, [
+        [151, 'Pig out at the candy store. No shame.'],
+        [343, 'Tons of desserts to choose from.'],
+        [344, 'Everyone loves ice cream.']
+      ]); break;
+      // Cruise, Hotel, Resort
+      case '/getaway': findPlaces(res, [
+        [431, 'Go on a cruise.'],
+        [436, 'Check into a hotel.'],
+        [438, 'Splurge on a resort.']
       ]); break;
 
       case '/landmark': findPlaces(res, [107]); break;

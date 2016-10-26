@@ -41,12 +41,14 @@ makeButtons([
     ['fifthdate', 'Fifth Date'],
     ['goingwell', 'Date Going Well'],
     ['meat', 'Craving Meat'],
+    ['nomeat', 'Not Craving meat'],
     ['largegroup', 'Large Group'],
     ['nightout', 'Night Out'],
     ['learn', 'Learn Something'],
-    ['allday', 'Spend The Whole Day Out'],
+    ['allday', 'Whole Day Affair'],
     ['nogoingback', 'No Going Back'],
-    ['nature', 'Nature']
+    ['nature', 'Nature'],
+    ['sweettooth', 'Sweet Tooth']
 ]);
 
 function sendPosition(pos) {
