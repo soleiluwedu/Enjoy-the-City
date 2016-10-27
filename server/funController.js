@@ -73,7 +73,7 @@ const funController = {
       ]); break;
       // Vegan / vegetarian
       case '/nomeat': findPlaces(res, [
-        [368, 'Would rather toss a salad than eat meat.']
+        [368, 'Not eating anything that had parents.']
       ]); break;
       // Beach or Park or Lounge or Resort
       case '/largegroup': findPlaces(res, [
