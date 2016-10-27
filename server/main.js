@@ -8,7 +8,7 @@ document.getElementById('top').appendChild(title);
 const pic = document.createElement('img');
 pic.id = 'pic';
 pic.src = "ferris.jpg";
-pic.height = "200";
+pic.width = "420";
 document.getElementById('top').appendChild(pic);
 
 const allbtns = document.createElement('div');
