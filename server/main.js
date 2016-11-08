@@ -33,6 +33,7 @@ function makeButtons(array) {
             xmlhttp.setRequestHeader("Content-type", "text/html");
             xmlhttp.onload = () => { showPlaces(JSON.parse(xmlhttp.responseText)) };
             xmlhttp.send();
+            // Not choosing to use GPS location due to small radius of Factual.com API search
             // console.log("Retrieving location from Google Maps API to send...");
             // navigator.geolocation.getCurrentPosition(sendPosition, error);
         });
@@ -47,14 +48,14 @@ makeButtons([
     ['fifthdate', 'Fifth Date'],
     ['goingwell', 'Date Going Well'],
     ['meat', 'Craving Meat'],
-    ['nomeat', 'Not Craving Meat'],
+    ['nomeat', 'Craving Veggies'],
     ['largegroup', 'Large Group'],
     ['nightout', 'Night Out'],
     ['learn', 'Learn'],
-    ['allday', 'Whole Day Affair'],
+    ['allday', 'All Day Experience'],
     ['nogoingback', 'No Going Back'],
-    ['nature', 'Nature'],
-    ['sweettooth', 'Sweet Tooth']
+    ['nature', 'Nature']/*,
+    ['sweettooth', 'Sweet Tooth']*/
 ]);
 
 function sendPosition(pos) {

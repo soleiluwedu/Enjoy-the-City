@@ -18,15 +18,22 @@ html {
     margin-bottom: 20px;
 }
 
+#main {
+    width: 32%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #places {
-    width: 33%;
+    width: 91%;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
 #allbtns {
-    width: 94%;
+    width: 91%;
     display: block;
     margin: auto;
 }
