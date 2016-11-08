@@ -11,6 +11,8 @@ pic.src = `ferris.jpg`;
 pic.width = `420`;
 document.getElementById(`top`).appendChild(pic);
 
+const main = document.getElementById(`main`);
+
 const allbtns = document.createElement(`div`);
 allbtns.id = `allbtns`
 document.getElementById(`nav`).appendChild(allbtns);
@@ -22,17 +24,23 @@ const makeButtons = (array) => {
         btnCreated.className = `btn`;
         btnCreated.id = array[i][0];
         btnCreated.addEventListener(`click`, (e) => {
-            if (document.getElementById(`loading`)) document.getElementById(`loading`).remove();
-            if (document.getElementById(`places`)) document.getElementById(`places`).remove();
-            const loading = document.createElement(`p`);
+            // Removing previous loading or places divs if already present
+            let loading = document.getElementById(`loading`);
+            if (loading) loading.remove();
+            let places = document.getElementById(`places`);
+            if (places) places.remove();
+            // Adding a "Loading" message as a placeholder until data returns
+            loading = document.createElement(`p`);
             loading.id = `loading`;
             loading.textContent = `⏱ Downloading data...`;
-            document.getElementById(`main`).appendChild(loading);
-            const xmlhttp = new XMLHttpRequest();
-            xmlhttp.open(`POST`, `/${array[i][0]}`);
-            xmlhttp.setRequestHeader("Content-type", "text/html");
-            xmlhttp.onload = () => { showPlaces(JSON.parse(xmlhttp.responseText)) };
-            xmlhttp.send();
+            main.appendChild(loading);
+            // Sending request to Factual.com API for data
+            const xml = new XMLHttpRequest();
+            xml.open(`POST`, `/${array[i][0]}`);
+            xml.setRequestHeader("Content-type", "text/html");
+            xml.onload = () => { showPlaces(JSON.parse(xml.responseText)) };
+            xml.send();
+            // Resetting button classes for highlighting purposes
             const allButtons = document.getElementsByClassName(`btn`);
             const abLength = allButtons.length;
             for (let i = 0; i < abLength; i++) allButtons[i].className = `btn`
@@ -41,7 +49,7 @@ const makeButtons = (array) => {
             // console.log("Retrieving location from Google Maps API to send...");
             // navigator.geolocation.getCurrentPosition(sendPosition, error);
         });
-        document.getElementById(`allbtns`).appendChild(btnCreated);
+        allbtns.appendChild(btnCreated);
     }
 }
 
@@ -67,20 +75,24 @@ const sendPosition = (pos) => {
     const lat = pos.coords.latitude;
     const long = pos.coords.longitutde;
     console.log(`Location obtained from Google Maps API. Sending position object: ${pos}`)
-    const xmlhttp = new XMLHttpRequest();
-    xmlhttp.open(`POST`, { url: `/firstdate`, lat: lat, long: long });
-    xmlhttp.setRequestHeader(`Content-type`, `application/json`);
-    xmlhttp.onLoad = (results) => { showPlaces(results) }
-    xmlhttp.send();
+    const xml = new XMLHttpRequest();
+    xml.open(`POST`, { url: `/firstdate`, lat: lat, long: long });
+    xml.setRequestHeader(`Content-type`, `application/json`);
+    xml.onLoad = (results) => { showPlaces(results) }
+    xml.send();
 }
 
 const error = (err) => { console.error(`ERROR getting geolocation (Code ${err.code} ): ${err.message}`) };
 
 const showPlaces = (results) => {
-    if (loading = document.getElementById(`loading`)) loading.remove();
-    if (places = document.getElementById(`places`)) places.remove();
-    const placesDiv = document.createElement(`div`);
-    placesDiv.id = `places`;
+    // Removing previous loading or places divs if already present
+    let loading = document.getElementById(`loading`);
+    if (loading) loading.remove();
+    let places = document.getElementById(`places`);
+    if (places) places.remove();
+    // Making new place
+    places = document.createElement(`div`);
+    places.id = `places`;
     results.forEach(pair => {
         const entry = document.createElement(`p`);
         const desc = document.createElement(`span`);
@@ -104,7 +116,7 @@ const showPlaces = (results) => {
         address.className = `address`;
         address.textContent = `${pair[0].address}, ${pair[0].locality}, ${pair[0].region} ${pair[0].postcode}`;
         entry.appendChild(address);
-        placesDiv.appendChild(entry);
-        document.getElementById(`main`).appendChild(placesDiv);
+        places.appendChild(entry);
+        main.appendChild(places);
     });
 }
