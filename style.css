@@ -8,10 +8,12 @@ html {
 #title {
     margin-top: 20px;
     text-align: center;
-    color: #cccccc
+    color:sandybrown;
 }
 
 #pic {
+    border: solid 1px;
+    border-color: midnightblue;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -36,6 +38,24 @@ html {
     width: 91%;
     display: block;
     margin: auto;
+}
+
+.btn {
+    margin: 1px;
+    background-color: slateblue;
+    border: solid 1px;
+    border-color: darkslateblue;
+    border-radius: 3px;
+    outline: none;
+}
+
+.btnselected {
+    margin: 1px;
+    background-color: salmon;
+    border: solid 1px;
+    border-color: darksalmon;
+    border-radius: 3px;
+    outline: none;
 }
 
 #loading {
