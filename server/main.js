@@ -74,7 +74,6 @@ function error(err) {
 };
 
 function showPlaces(results) {
-    console.log("showPlaces. results =", results)
     if (document.getElementById('loading')) document.getElementById('loading').remove();
     if (document.getElementById('places')) document.getElementById('places').remove();
     const placesDiv = document.createElement('div');
