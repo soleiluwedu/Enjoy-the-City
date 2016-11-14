@@ -1,5 +1,4 @@
-`use strict`;
-
+`use strict`
 const title = document.createElement(`h1`);
 title.textContent = `Life is Short. Don't Waste It.`;
 title.id = `title`;
@@ -24,6 +23,8 @@ const makeButtons = (array) => {
         btnCreated.className = `btn`;
         btnCreated.id = array[i][0];
         btnCreated.addEventListener(`click`, (e) => {
+            console.profile("Getting places");
+            console.time("Timing getting places");
             // Removing previous loading or places divs if already present
             let loading = document.getElementById(`loading`);
             if (loading) loading.remove();
@@ -53,24 +54,6 @@ const makeButtons = (array) => {
     }
 }
 
-makeButtons([
-    [`firstdate`, `First Date`],
-    [`seconddate`, `Second Date`],
-    [`thirddate`, `Third Date`],
-    [`fourthdate`, `Fourth Date`],
-    [`fifthdate`, `Fifth Date`],
-    [`goingwell`, `Date Going Well`],
-    [`meat`, `Craving Meat`],
-    [`nomeat`, `Craving Veggies`],
-    [`largegroup`, `Large Group`],
-    [`nightout`, `Night Out`],
-    [`learn`, `Learn`],
-    [`allday`, `All Day Experience`],
-    [`nogoingback`, `No Going Back`],
-    [`nature`, `Nature`],
-    [`sweettooth`, `Sweet Tooth`]
-]);
-
 const sendPosition = (pos) => {
     const lat = pos.coords.latitude;
     const long = pos.coords.longitutde;
@@ -92,6 +75,7 @@ const showPlaces = (results) => {
     if (places) places.remove();
     // Making new place
     places = document.createElement(`div`);
+    console.timeStamp("Places div created");
     places.id = `places`;
     results.forEach(pair => {
         const entry = document.createElement(`p`);
@@ -119,4 +103,24 @@ const showPlaces = (results) => {
         places.appendChild(entry);
         main.appendChild(places);
     });
+    console.timeEnd("Timing getting places");
+    console.profileEnd();
 }
+
+makeButtons([
+    [`firstdate`, `First Date`],
+    [`seconddate`, `Second Date`],
+    [`thirddate`, `Third Date`],
+    [`fourthdate`, `Fourth Date`],
+    [`fifthdate`, `Fifth Date`],
+    [`goingwell`, `Date Going Well`],
+    [`meat`, `Craving Meat`],
+    [`nomeat`, `Craving Veggies`],
+    [`largegroup`, `Large Group`],
+    [`nightout`, `Night Out`],
+    [`learn`, `Learn`],
+    [`allday`, `All Day Experience`],
+    [`nogoingback`, `No Going Back`],
+    [`nature`, `Nature`],
+    [`sweettooth`, `Sweet Tooth`]
+]);

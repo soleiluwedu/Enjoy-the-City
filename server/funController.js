@@ -228,6 +228,7 @@ const findPlaces = (res, codes) => {
     });
     return oath;
   });
+  console.time("⏰ Timing promises");
   Promise.all(vows)
     .then((factualRes) => {
       return factualRes.map(pair => {
@@ -243,6 +244,7 @@ const findPlaces = (res, codes) => {
       res.writeHead(200, { "Content-Type": `application/json` });
       res.write(JSON.stringify(results));
       res.end();
+      console.timeEnd("⏰ Timing promises");
     }).catch(err => {
       console.log(err);
       res.writeHead(500, { "Content-Type": `text/html` });
