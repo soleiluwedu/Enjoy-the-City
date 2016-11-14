@@ -35,7 +35,7 @@ const makeButtons = (array) => {
             // Adding a "Loading" message as a placeholder until data returns
             loading = document.createElement(`p`);
             loading.id = `loading`;
-            loading.textContent = `⏱ Downloading data...`;
+            loading.textContent = `⏰ Downloading data...`;
             main.appendChild(loading);
             // Sending request to Factual.com API for data
             const xml = new XMLHttpRequest();
