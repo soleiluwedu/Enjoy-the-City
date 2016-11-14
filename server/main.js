@@ -107,6 +107,9 @@ const showPlaces = (results) => {
         main.appendChild(places);
     });
     // Done adding places to DOM
+    console.log("DIR");
+    console.dir(places);
+    console.log("DIRXML");
     console.dirxml(places);
     console.trace("STACK TRACE: Done adding places");
     console.timeEnd("Timing getting places");
