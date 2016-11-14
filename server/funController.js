@@ -244,8 +244,10 @@ const findPlaces = (res, codes) => {
       res.writeHead(200, { "Content-Type": `application/json` });
       res.write(JSON.stringify(results));
       res.end();
+      console.trace("Promises resolved");
       console.timeEnd("⏰ Timing promises");
-    }).catch(err => {
+    })
+    .catch(err => {
       console.log(err);
       res.writeHead(500, { "Content-Type": `text/html` });
       res.write(`No data found.`);

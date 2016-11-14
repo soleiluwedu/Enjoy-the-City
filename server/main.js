@@ -22,9 +22,11 @@ const makeButtons = (array) => {
         btnCreated.textContent = array[i][1];
         btnCreated.className = `btn`;
         btnCreated.id = array[i][0];
+        // Button click listener
         btnCreated.addEventListener(`click`, (e) => {
             console.profile("Getting places");
             console.time("Timing getting places");
+            console.markTimeline("MARKTIMELINE: Button pressed");
             // Removing previous loading or places divs if already present
             let loading = document.getElementById(`loading`);
             if (loading) loading.remove();
@@ -75,7 +77,7 @@ const showPlaces = (results) => {
     if (places) places.remove();
     // Making new place
     places = document.createElement(`div`);
-    console.timeStamp("Places div created");
+    console.timeStamp("TIMESTAMP: Places div created");
     places.id = `places`;
     results.forEach(pair => {
         const entry = document.createElement(`p`);
@@ -88,6 +90,7 @@ const showPlaces = (results) => {
         name.className = `name`;
         name.textContent = pair[0].name;
         entry.appendChild(name);
+        // Neighborhood field is not always populated
         if (pair[0].neighborhood) {
             entry.innerHTML += ` in `;
             const neighborhood = document.createElement(`span`);
@@ -103,6 +106,9 @@ const showPlaces = (results) => {
         places.appendChild(entry);
         main.appendChild(places);
     });
+    // Done adding places to DOM
+    console.dirxml(places);
+    console.trace("Done adding places");
     console.timeEnd("Timing getting places");
     console.profileEnd();
 }
@@ -121,6 +127,6 @@ makeButtons([
     [`learn`, `Learn`],
     [`allday`, `All Day Experience`],
     [`nogoingback`, `No Going Back`],
-    [`nature`, `Nature`],
-    [`sweettooth`, `Sweet Tooth`]
+    [`nature`, `Nature`]//,
+    //[`sweettooth`, `Sweet Tooth`]
 ]);
