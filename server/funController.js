@@ -244,7 +244,7 @@ const findPlaces = (res, codes) => {
       res.writeHead(200, { "Content-Type": `application/json` });
       res.write(JSON.stringify(results));
       res.end();
-      console.trace("Promises resolved");
+      console.trace("STACK TRACE: Promises resolved");
       console.timeEnd("⏰ Timing promises");
     })
     .catch(err => {

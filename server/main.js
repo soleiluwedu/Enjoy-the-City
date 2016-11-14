@@ -108,7 +108,7 @@ const showPlaces = (results) => {
     });
     // Done adding places to DOM
     console.dirxml(places);
-    console.trace("Done adding places");
+    console.trace("STACK TRACE: Done adding places");
     console.timeEnd("Timing getting places");
     console.profileEnd();
 }
