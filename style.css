@@ -5,13 +5,14 @@ html {
     color: #aaaaaa
 }
 
-#title {
+#titletext {
     margin-top: 20px;
     text-align: center;
     color:sandybrown;
 }
 
 #pic {
+    width: 420px;
     border: solid 1px;
     border-color: midnightblue;
     display: block;
@@ -21,21 +22,21 @@ html {
 }
 
 #main {
-    width: 32%;
+    width: 420px;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
 #places {
-    width: 91%;
+    width: 420px;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
 #allbtns {
-    width: 91%;
+    width: 100%;
     display: block;
     margin: auto;
 }
@@ -47,6 +48,10 @@ html {
     border-color: darkslateblue;
     border-radius: 3px;
     outline: none;
+}
+
+.btn:hover {
+    border-color: lightblue;
 }
 
 .btnselected {
