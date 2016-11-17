@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const funController = require('./funController');
 const path = require('path');
+const PORT = 5300;
 
 const style = {
     reset: `\x1b[0m`,
@@ -23,6 +24,6 @@ app.use(express.static(path.join(__dirname, '../')));
 
 app.post('*', funController.postData);
 
-app.listen(3000, () => { console.log(`🤘 ${style.bold}${style.blue}Ready to rock on port 3000${style.reset}`) });
+app.listen(PORT, () => { console.log(`🤘 ${style.bold}${style.blue}Ready to rock on port ${PORT}${style.reset}`) });
 
 module.exports = app;

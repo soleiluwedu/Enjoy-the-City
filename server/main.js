@@ -121,10 +121,7 @@ const showPlaces = (results) => {
         places.appendChild(entry);
         main.appendChild(places);
     }); // Done adding places to DOM
-    // console.assert(document.getElementById("firstdate").className === `btn btnselected`, "First Date not selected")
-    // console.log("DIR");
-    // console.dir(places);
-    // console.log("DIRXML");
+    // console.assert(document.getElementById("firstdate").className === `btn btnselected`, "First Date not selected");
     // console.dirxml(places);
     // console.trace("Done adding places");
     // console.timeEnd("Timing getting places");
