@@ -4,9 +4,24 @@ const request = require(`request`);
 const Factual = require(`factual-api`);
 const factual = new Factual(`Jr4VU8j7IWGNP3P8tg2x21WVC58Opn0w7Zr5EUeo`, `rYkYbju3AROrBb3E4HM9PriEsCfrgzXvoTaQNJet`);
 
+const style = {
+    reset: `\x1b[0m`,
+    bold: `\x1b[1m`,
+    underline: `\x1b[4m`,
+    inverse: `\x1b[7m`,
+    black: `\x1b[30m`,
+    white: `\x1b[37m`,
+    red: `\x1b[31m`,
+    green: `\x1b[32m`,
+    yellow: `\x1b[33m`,
+    blue: `\x1b[34m`,
+    magenta: `\x1b[35m`,
+    cyan: `\x1b[36m`
+}
+
 const funController = {
   postData: (req, res) => {
-    console.log(`✉️  POST request received for ${req.url}`)
+    console.log(`✉️ ${style.green}${style.bold}POST${style.reset}${style.green} request received for ${style.red}${style.bold}${req.url}${style.reset}`)
     switch (req.url) {
       // Cafe, Skating
       case `/firstdate`: findPlaces(res, [
@@ -221,22 +236,22 @@ const funController = {
 const findPlaces = (res, codes) => {
   const vows = codes.map(code => {
     const oath = new Promise((resolve, reject) => {
-      factual.get(`/t/places-us`, { filters: { "$and": [{ locality: "los angeles", category_ids: { "$includes": code[0] } }] } }, function (error, factualRes) {
+      factual.get(`/t/places-us`, { filters: { "$and": [{ locality: "los angeles", category_ids: { "$includes": code[0] } }] } }, (error, factualRes) => {
         if (!error) resolve([factualRes, code[1]]);
         else reject(error);
       });
     });
     return oath;
   });
-  console.time("⏰ Timing promises");
+  console.time(`⏰ ${style.magenta}Timing promises${style.reset}`);
   Promise.all(vows)
     .then((factualRes) => {
       return factualRes.map(pair => {
         const pickOne = Math.floor(Math.random() * pair[0].data.length);
-        let toLog = ``;
-        toLog += pair[0].data[pickOne].name;
-        toLog += pair[0].data[pickOne].neighborhood ? ` in ` + pair[0].data[pickOne].neighborhood[0] : ``;
-        console.log(toLog);
+        let venue = ``;
+        venue += pair[0].data[pickOne].name;
+        venue += pair[0].data[pickOne].neighborhood ? ` in ${pair[0].data[pickOne].neighborhood[0]}` : ``;
+        console.log(`${style.cyan}${venue}${style.reset}`);
         return [pair[0].data[pickOne], pair[1]];
       });
     })
@@ -244,8 +259,8 @@ const findPlaces = (res, codes) => {
       res.writeHead(200, { "Content-Type": `application/json` });
       res.write(JSON.stringify(results));
       res.end();
-      console.trace("STACK TRACE: Promises resolved");
-      console.timeEnd("⏰ Timing promises");
+      // console.trace("Promises resolved");
+      console.timeEnd(`⏰ ${style.magenta}Timing promises${style.reset}`);
     })
     .catch(err => {
       console.log(err);

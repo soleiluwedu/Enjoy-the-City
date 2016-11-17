@@ -4,12 +4,25 @@ const app = express();
 const funController = require('./funController');
 const path = require('path');
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-app.use(express.static(path.join(__dirname, '../' )));
+const style = {
+    reset: `\x1b[0m`,
+    bold: `\x1b[1m`,
+    underline: `\x1b[4m`,
+    inverse: `\x1b[7m`,
+    black: `\x1b[30m`,
+    white: `\x1b[37m`,
+    red: `\x1b[31m`,
+    green: `\x1b[32m`,
+    yellow: `\x1b[33m`,
+    blue: `\x1b[34m`,
+    magenta: `\x1b[35m`,
+    cyan: `\x1b[36m`
+}
+
+app.use(express.static(path.join(__dirname, '../')));
+
 app.post('*', funController.postData);
-app.listen(3000, () => {console.log(`listening on port 3000...`)});
+
+app.listen(3000, () => { console.log(`🤘 ${style.bold}${style.blue}Ready to rock on port 3000${style.reset}`) });
+
 module.exports = app;

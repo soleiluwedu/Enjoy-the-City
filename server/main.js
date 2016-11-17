@@ -1,9 +1,5 @@
 `use strict`
 
-// Creating title text
-const titletext = document.createElement(`h1`);
-document.getElementById(`top`).appendChild(titletext);
-
 // Creating pic
 const pic = document.createElement(`img`);
 pic.id = `pic`;
@@ -12,7 +8,7 @@ document.getElementById(`top`).appendChild(pic);
 
 // Creating buttons
 const allbtns = document.createElement(`div`);
-allbtns.id = `allbtns`
+allbtns.id = `allbtns`;
 document.getElementById(`nav`).appendChild(allbtns);
 
 // Setting main element
@@ -28,17 +24,20 @@ const clearPlaces = () => {
 
 // Create all buttons
 const makeButtons = (array) => {
-    console.groupCollapsed("Making buttons");
+    // console.groupCollapsed("Buttons created");
     for (let i = 0; i < array.length; i++) {
         const btnCreated = document.createElement(`button`);
         btnCreated.textContent = array[i][1];
         btnCreated.className = `btn`;
         btnCreated.id = array[i][0];
-        console.log(`Creating button called ${btnCreated.id}`);
+
+        // console.log(`Creating button called ${btnCreated.id}`);
+
         // Button click listener
         btnCreated.addEventListener(`click`, (e) => {
+            // console.log(`Button ${btnCreated.id} pressed`);
             // console.time("Timing getting places");
-            console.profile("Getting places");
+            // console.profile("Getting places");
 
             // Removing previous loading or places divs if already present
             clearPlaces();
@@ -50,11 +49,11 @@ const makeButtons = (array) => {
             main.appendChild(loading);
 
             // Sending request to Factual.com API for data
-            const xml = new XMLHttpRequest();
-            xml.open(`POST`, `/${array[i][0]}`);
-            xml.setRequestHeader("Content-type", "text/html");
-            xml.onload = () => { showPlaces(JSON.parse(xml.responseText)) };
-            xml.send();
+            const xhr = new XMLHttpRequest();
+            xhr.open(`POST`, `/${array[i][0]}`);
+            xhr.setRequestHeader("Content-type", "text/html");
+            xhr.onload = () => { showPlaces(JSON.parse(xhr.responseText)) };
+            xhr.send();
 
             // Resetting button classes for highlighting purposes
             const allButtons = document.getElementsByClassName(`btn`);
@@ -67,7 +66,7 @@ const makeButtons = (array) => {
         });
         allbtns.appendChild(btnCreated);
     }
-    console.groupEnd("Making buttons");
+    // console.groupEnd("Buttons created");
 }
 
 // Create Places div
@@ -75,15 +74,18 @@ const showPlaces = (results) => {
     // Removing previous loading or places divs if already present
     clearPlaces();
 
-    // Making new place
+    // Making new places div
     places = document.createElement(`div`);
+    places.id = `places`;
 
     // console.timeStamp("Places div created");
-    places.id = `places`;
+
     results.forEach(pair => {
+
         // console.count("Getting another place");
         const entry = document.createElement(`p`);
 
+        // Description/comment (not from API)
         const desc = document.createElement(`span`);
         desc.className = `desc`;
         desc.textContent = pair[1];
@@ -91,11 +93,11 @@ const showPlaces = (results) => {
 
         entry.innerHTML += `<br>`;
 
+        // Name of place
         const name = document.createElement(`span`);
         name.className = `name`;
         name.textContent = pair[0].name;
         entry.appendChild(name);
-
         // Neighborhood field is not always populated
         if (pair[0].neighborhood) {
             entry.innerHTML += ` in `;
@@ -107,24 +109,26 @@ const showPlaces = (results) => {
 
         entry.innerHTML += `<br>`;
 
+        // Building up address
         const address = document.createElement(`span`);
         address.className = `address`;
         // Some landmarks have no number address
         if (pair[0].address) address.textContent += `${pair[0].address}, `
-        address.textContent += `${pair[0].locality }, ${pair[0].region } ${pair[0].postcode }`;
+        address.textContent += `${pair[0].locality}, ${pair[0].region} ${pair[0].postcode}`;
 
+        // Appending divs to DOM
         entry.appendChild(address);
         places.appendChild(entry);
         main.appendChild(places);
     }); // Done adding places to DOM
-
+    // console.assert(document.getElementById("firstdate").className === `btn btnselected`, "First Date not selected")
     // console.log("DIR");
     // console.dir(places);
     // console.log("DIRXML");
     // console.dirxml(places);
-    // console.trace("STACK TRACE: Done adding places");
-    console.profileEnd();
+    // console.trace("Done adding places");
     // console.timeEnd("Timing getting places");
+    // console.profileEnd();
 }
 
 makeButtons([

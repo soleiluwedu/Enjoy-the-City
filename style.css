@@ -1,14 +1,15 @@
-html {
+html, body {
     margin: 0;
+    padding: 0;
     background-color: #336699;
     font-family: Arial;
     color: #aaaaaa
 }
 
-#titletext {
+#top {
     margin-top: 20px;
+    margin-bottom: 20px;
     text-align: center;
-    color:sandybrown;
 }
 
 #pic {
@@ -18,7 +19,6 @@ html {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 20px;
 }
 
 #main {
