@@ -11,7 +11,7 @@ const allbtns = document.createElement(`div`);
 allbtns.id = `allbtns`;
 document.getElementById(`nav`).appendChild(allbtns);
 
-// Setting main element
+// Setting variable to main element
 const main = document.getElementById(`main`);
 
 // Clear out any Loading div or Places div

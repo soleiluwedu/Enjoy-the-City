@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const funController = require('./funController');
 const path = require('path');
-const PORT = 5300;
+const PORT = 3000;
 
 const style = {
     reset: `\x1b[0m`,

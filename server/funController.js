@@ -241,6 +241,7 @@ const funController = {
   }
 }
 
+// Gets data from Factual.com API and returns it to client
 const findPlaces = (res, codes) => {
   const vows = codes.map(code => {
     const oath = new Promise((resolve, reject) => {
