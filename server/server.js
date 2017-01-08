@@ -1,4 +1,5 @@
-'use strict';
+'use strict'
+
 const express = require('express');
 const app = express();
 const funController = require('./funController');
