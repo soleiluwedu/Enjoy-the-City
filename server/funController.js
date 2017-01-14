@@ -1,4 +1,4 @@
-`use strict`;
+`use strict`
 
 const request = require(`request`);
 const Factual = require(`factual-api`);
