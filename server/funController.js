@@ -30,7 +30,7 @@ const style = {
 const funController = {
   getData: (req, res) => {
 
-    console.log(`✉️ ${style.cyan}GET request received for ${style.red}${req.url}${style.reset}`)
+    console.log(`✉️ ${style.cyan}GET request received for ${style.red}${req.url}${style.reset}`);
 
     switch (req.url) {
       case `/firstdate`: findPlaces(res, [
