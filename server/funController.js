@@ -225,9 +225,9 @@ const funController = {
 }
 
 // Gets data from Factual.com API and returns it to client
-const findPlaces = (res, codes) => {
+const findPlaces = (res, codeDesc) => {
 
-  const vows = codes.map(pair =>
+  const vows = codeDesc.map(pair =>
     new Promise((resolve, reject) => {
       factual.get(
         `/t/places-us`,
