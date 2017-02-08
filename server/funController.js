@@ -29,123 +29,107 @@ const style = {
 
 const funController = {
   getData: (req, res) => {
-    console.log(`✉️ ${style.green}${style.bold}POST${style.reset}${style.green} request received for ${style.red}${style.bold}${req.url}${style.reset}`)
+    console.log(`✉️ ${style.green}${style.bold}GET${style.reset}${style.green} request received for ${style.red}${style.bold}${req.url}${style.reset}`)
     switch (req.url) {
-      // Cafe, Skating
       case `/firstdate`: findPlaces(res, [
-        [342, `First date is the crazy-check. Start with a cafe.`],
+        [342, `☕️ First date is the crazy-check. Start with a cafe.`],
         Math.ceil(Math.random() * 2) % 2 === 1
-          ? [402, `If it goes well, how about skating?`]
-          : [463, `If it goes well, how about the arcade?`]
+          ? [402, `⛸ If it goes well, how about skating?`]
+          : [463, `🕹 If it goes well, how about the arcade?`]
       ]); break;
-      // Costumes, Arcade, Middle Eastern restaurant
       case `/seconddate`: findPlaces(res, [
         Math.ceil(Math.random() * 2) % 2 === 1
-          ? [139, `Try on some costumes.`]
-          : [336, `See a psychic together.`],
+          ? [139, `🤡 Try on some costumes.`]
+          : [336, `🔮 See a psychic together.`],
         Math.ceil(Math.random() * 2) % 2 === 1
-          ? [311, `Visit a museum.`]
-          : [331, `Go mini-golfing.`],
+          ? [311, `🎟 Visit a museum.`]
+          : [331, `⛳ Go mini-golfing.`],
         Math.ceil(Math.random() * 2) % 2 === 1
-          ? [362, `Relax with some Middle Eastern cuisine.`]
-          : [359, `Have some Japanese.`]
+          ? [362, `🥙 Relax with some Middle Eastern cuisine.`]
+          : [359, `🍱 Have some Japanese.`]
       ]); break;
-      // Italian restaurant, Show, Wine Bar
       case `/thirddate`: findPlaces(res, [
         Math.ceil(Math.random() * 2) % 2 === 1
-          ? [358, `Let's start with dinner at an Italian restaurant.`]
-          : [364, `Let's start with dinner at a seafood restaurant.`],
+          ? [358, `🍝 Let's start with dinner at an Italian restaurant.`]
+          : [364, `🍤 Let's start with dinner at a seafood restaurant.`],
         Math.ceil(Math.random() * 2) % 2 === 1
-          ? [333, `Go see a show.`]
-          : [330, `Sing karaoke and embarrass yourself.`],
+          ? [333, `🎭 Go see a show.`]
+          : [330, `🎤 Sing karaoke and embarrass yourself.`],
         Math.ceil(Math.random() * 2) % 2 === 1
-          ? [316, `Talk about it over wine.`]
-          : [313, `Relax and talk to each other at a lounge.`]
+          ? [316, `🍷 Talk about it over wine.`]
+          : [313, `🛋 Relax and talk to each other at a lounge.`]
       ]); break;
-      // Mini Golf, Seafood restaurant, Art Gallery
       case `/fourthdate`: findPlaces(res, [
         Math.ceil(Math.random() * 2) % 2 === 1
-          ? [311, `Start the day at a museum.`]
-          : [331, `Start with mini-golf.`],
+          ? [311, `🎟 Start the day at a museum.`]
+          : [331, `⛳ Start with mini-golf.`],
         Math.ceil(Math.random() * 2) % 2 === 1
-          ? [364, `Enjoy some seafood.`]
-          : [366, `Enjoy sushi.`],
+          ? [364, `🍤 Enjoy some seafood.`]
+          : [366, `🍣 Enjoy sushi.`],
         Math.ceil(Math.random() * 2) % 2 === 1
-          ? [282, `Get massages together.`]
-          : [148, `Maybe flowers are in order.`]
+          ? [282, `💆🏼 Get massages together.`]
+          : [148, `💐 Maybe flowers are in order.`]
       ]); break;
-      // Horseback Riding, French restaurant, Dessert
       case `/fifthdate`: findPlaces(res, [
         Math.ceil(Math.random() * 2) % 2 === 1
-          ? [389, `Go hiking.`]
-          : [380, `Go horseback riding.`],
+          ? [389, `⛰ Go hiking.`]
+          : [380, `🏇 Go horseback riding.`],
         Math.ceil(Math.random() * 2) % 2 === 1
-          ? [356, `Dine at a French restaurant.`]
-          : [414, `Take a yoga class together.`],
-        [343, `If this person made it to a fifth date, he/she deserves dessert.`]
+          ? [356, `🥖 Dine at a French restaurant.`]
+          : [414, `🤸 Take a yoga class together.`],
+        [343, `🍰 If this person made it to a fifth date, he/she deserves dessert.`]
       ]); break;
-      // Hotel
       case `/goingwell`: findPlaces(res, [
-        [436, `Is the date going well?`]
+        [436, `🏩 Is the date going well?`]
       ]); break;
-      // BBQ, Steak
       case `/meat`: findPlaces(res, [
-        [349, `Go to a BBQ joint.`],
-        [365, `Or have a nice steak.`]
+        [349, `🍖 Go to a BBQ joint.`],
+        [365, `🐄 Or have a nice steak.`]
       ]); break;
-      // Vegan / vegetarian
       case `/nomeat`: findPlaces(res, [
-        [368, `Not eating anything that had parents.`]
+        [368, `🥗 Not eating anything that had parents.`]
       ]); break;
-      // Beach or Park or Lounge or Resort
       case `/largegroup`: findPlaces(res, [
-        [113, `How about the beach?`],
-        [118, `Or maybe the park?`],
-        [313, `Maybe chill at a lounge.`],
-        [332, `Don't feel like talking to everyone? See a movie.`]
+        [113, `🏖 How about the beach?`],
+        [118, `🏕 Or maybe the park?`],
+        [313, `🛋 Maybe chill at a lounge.`],
+        [332, `🎞 Don't feel like talking to everyone? See a movie.`]
       ]); break;
-      // Nightclub, Jazz, Adult
       case `/nightout`: findPlaces(res, [
-        [334, `Have a night out at the club.`],
-        [314, `Let the jazz take over your ears.`],
-        [318, `End it with some late night entertainment.`]
+        [334, `💃🏼 Have a night out at the club.`],
+        [314, `🎷 Let the jazz take over your ears.`],
+        [318, `👠 End it with some late night entertainment.`]
       ]); break;
-      // Martial arts, Museum, Psychic
       case `/learn`: findPlaces(res, [
-        [377, `Train in a martial art.`],
-        [311, `Visit a museum.`],
-        [336, `Find out your fortune.`]
+        [377, `🥋 Train in a martial art.`],
+        [311, `🎟 Visit a museum.`],
+        [336, `🔮 Find out your fortune.`]
       ]); break;
-      // Winery, Cheese, Golf course, Spa, Hiking
       case `/allday`: findPlaces(res, [
-        [370, `Take a trip to the winery.`],
-        [152, `Have some cheese with that wine.`],
-        [451, `Air it out on the golf course.`],
-        [285, `Treat your body well at the spa.`],
-        [389, `Explore a trail.`]
+        [370, `🍷 Take a trip to the winery.`],
+        [152, `🧀 Have some cheese with that wine.`],
+        [451, `⛳ Air it out on the golf course.`],
+        [285, `💆🏼 Treat your body well at the spa.`],
+        [389, `⛰ Explore a trail.`]
       ]); break;
-      // Piercings, Tattooes
       case `/nogoingback`: findPlaces(res, [
-        [283, `Get a body piercing.`],
-        [287, `Put ink on your body.`]
+        [283, `📌 Get a body piercing.`],
+        [287, `🖋 Put ink on your body.`]
       ]); break;
-      // Garden, Natural, Beach, Park
       case `/nature`: findPlaces(res, [
-        [109, `Stroll the gardens.`],
-        [113, `Get tanned at the beach.`],
-        [118, `Relax at the park.`]
+        [109, `🌺 Stroll the gardens.`],
+        [113, `🏖 Get tanned at the beach.`],
+        [118, `🏕 Relax at the park.`]
       ]); break;
-      // Candy, Dessert, Ice Cream
       case `/sweettooth`: findPlaces(res, [
-        [151, `Pig out at the candy store. No shame.`],
-        [343, `Tons of desserts to choose from.`],
-        [344, `Everyone loves ice cream.`]
+        [151, `🍭 Pig out at the candy store. No shame.`],
+        [343, `🍰 Tons of desserts to choose from.`],
+        [344, `🍨 Everyone loves ice cream.`]
       ]); break;
-      // Cruise, Hotel, Resort
       case `/getaway`: findPlaces(res, [
-        [431, `Go on a cruise.`],
-        [436, `Check into a hotel.`],
-        [438, `Splurge on a resort.`]
+        [431, `🛳 Go on a cruise.`],
+        [436, `🏩 Check into a hotel.`],
+        [438, `🍹 Splurge on a resort.`]
       ]); break;
 
       case `/landmark`: findPlaces(res, [107]); break;
@@ -252,7 +236,7 @@ const findPlaces = (res, codes) => {
     });
     return oath;
   });
-  console.time(`⏰ ${style.magenta}Timing promises${style.reset}`);
+  // console.time(`⏰ ${style.magenta}Timing promises${style.reset}`);
   Promise.all(vows)
     .then((factualRes) => {
       return factualRes.map(pair => {
@@ -269,12 +253,12 @@ const findPlaces = (res, codes) => {
       res.write(JSON.stringify(results));
       res.end();
       // console.trace("Promises resolved");
-      console.timeEnd(`⏰ ${style.magenta}Timing promises${style.reset}`);
+      // console.timeEnd(`⏰ ${style.magenta}Timing promises${style.reset}`);
     })
     .catch(err => {
-      console.log(err);
+      console.log(`❗️${style.bold}${style.red}${err}${style.reset}`);
       res.writeHead(500, { "Content-Type": `text/html` });
-      res.write(`No data found.`);
+      res.write(err);
       res.end();
     });
 }

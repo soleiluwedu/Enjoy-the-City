@@ -50,7 +50,7 @@ const makeButtons = (array) => {
 
             // Sending request to Factual.com API for data
             const xhr = new XMLHttpRequest();
-            xhr.open(`POST`, `/${array[i][0]}`);
+            xhr.open(`GET`, `/${array[i][0]}`);
             xhr.setRequestHeader("Content-type", "text/html");
             xhr.onload = () => { showPlaces(JSON.parse(xhr.responseText)) };
             xhr.send();
