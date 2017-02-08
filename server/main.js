@@ -1,153 +1,148 @@
 `use strict`
 
-// Creating pic
-const pic = document.createElement(`img`);
-pic.id = `pic`;
-pic.src = `ferris.jpg`;
-document.getElementById(`top`).appendChild(pic);
+class Itinerary {
 
-// Creating buttons
-const allbtns = document.createElement(`div`);
-allbtns.id = `allbtns`;
-document.getElementById(`nav`).appendChild(allbtns);
+  constructor() {
+    this.main = document.getElementById(`main`);
+    this.allbtns = null;
+    this.lastBtnClicked = null;
+  }
 
-// Setting variable to main element
-const main = document.getElementById(`main`);
+  createPic() {
+    // Creating pic
+    const pic = document.createElement(`img`);
+    pic.id = `pic`;
+    pic.src = `ferris.jpg`;
+    document.getElementById(`top`).appendChild(pic);
+  }
 
-// Clear out any Loading div or Places div
-const clearPlaces = () => {
+  createBtnDiv() {
+    // Creating button div
+    const btns = document.createElement(`div`);
+    btns.id = `allbtns`;
+    document.getElementById(`nav`).appendChild(btns);
+    this.allbtns = btns;
+  }
+
+  clearPlaces() {
+    // Clear out any Loading message or Places div
     const loading = document.getElementById(`loading`);
     if (loading) loading.remove();
     const places = document.getElementById(`places`);
     if (places) places.remove();
-}
+  }
 
-// Create all buttons
-const makeButtons = (array) => {
-    // console.groupCollapsed("Buttons created");
-    for (let i = 0; i < array.length; i++) {
-        const btnCreated = document.createElement(`button`);
-        btnCreated.textContent = array[i][1];
-        btnCreated.className = `btn`;
-        btnCreated.id = array[i][0];
+  addLoadingMsg() {
+    // Add "Loading" message as a placeholder until data returns
+    const loading = document.createElement(`p`);
+    loading.id = `loading`;
+    loading.textContent = `⏰ Downloading data...`;
+    this.main.appendChild(loading);
+  }
 
-        // console.log(`Creating button called ${btnCreated.id}`);
+  makeButtons(array) {
+    array.forEach(btnpair => {
+      const btnCreated = document.createElement(`button`);
+      btnCreated.textContent = btnpair[1];
+      btnCreated.className = `btn`;
+      btnCreated.id = btnpair[0];
 
-        // Button click listener
-        btnCreated.addEventListener(`click`, (e) => {
-            // console.log(`Button ${btnCreated.id} pressed`);
-            // console.time("Timing getting places");
-            // console.profile("Getting places");
-            // console.count("arbitrary label")
-            // Removing previous loading or places divs if already present
-            clearPlaces();
+      // Button click listener
+      btnCreated.addEventListener(`click`, e => {
 
-            // Adding a "Loading" message as a placeholder until data returns
-            loading = document.createElement(`p`);
-            loading.id = `loading`;
-            loading.textContent = `⏰ Downloading data...`;
-            main.appendChild(loading);
+        this.clearPlaces();
 
-            // Sending request to Factual.com API for data
-            const xhr = new XMLHttpRequest();
-            xhr.open(`GET`, `/${array[i][0]}`);
-            xhr.setRequestHeader("Content-type", "text/html");
-            xhr.onload = () => { showPlaces(JSON.parse(xhr.responseText)) };
-            xhr.send();
+        this.addLoadingMsg();
 
-            // Resetting button classes for highlighting purposes
-            const allButtons = document.getElementsByClassName(`btn`);
-            const abLength = allButtons.length;
-            for (let i = 0; i < abLength; i++) allButtons[i].className = `btn`;
-            btnCreated.className = `btn btnselected`;
-            // Not choosing to use GPS location due to small radius of Factual.com API search
-            // console.log("Retrieving location from Google Maps API to send...");
-            // navigator.geolocation.getCurrentPosition(sendPosition, error);
-        });
-        allbtns.appendChild(btnCreated);
-    }
-    // console.groupEnd("Buttons created");
-}
+        // Sending request to Factual.com API for data
+        const xhr = new XMLHttpRequest();
+        xhr.open(`GET`, `/${btnpair[0]}`);
+        xhr.setRequestHeader("Content-type", "text/html");
+        xhr.onload = () => this.showPlaces(JSON.parse(xhr.responseText));
+        xhr.send();
 
-// Create Places div
-const showPlaces = (results) => {
-    // Removing previous loading or places divs if already present
-    clearPlaces();
+        // Changing button classes for highlighting purposes
+        if (this.lastBtnClicked) this.lastBtnClicked.className = `btn`;
+        this.lastBtnClicked = btnCreated;
+        this.lastBtnClicked.className = `btn btnselected`;
 
-    // console.table(results);
+        // Not choosing to use GPS location due to small radius of Factual.com API search
+        // console.log("Retrieving location from Google Maps API to send...");
+        // navigator.geolocation.getCurrentPosition(sendPosition, error);
+      })
+      // Append button to DOM
+      this.allbtns.appendChild(btnCreated);
+    });
+  }
+
+  showPlaces(results) {
+    this.clearPlaces();
 
     // Making new places div
-    places = document.createElement(`div`);
+    const places = document.createElement(`div`);
     places.id = `places`;
-
-    // console.timeStamp("Places div created");
 
     results.forEach(pair => {
 
-        // console.count("Getting another place");
-        const entry = document.createElement(`p`);
+      const entry = document.createElement(`p`);
 
-        // Description/comment (not from API)
-        const desc = document.createElement(`span`);
-        desc.className = `desc`;
-        desc.textContent = pair[1];
-        entry.appendChild(desc);
+      // Description/comment (not from API)
+      const desc = document.createElement(`span`);
+      desc.className = `desc`;
+      desc.textContent = pair[1];
+      entry.appendChild(desc);
 
-        entry.innerHTML += `<br>`;
+      entry.innerHTML += `<br>`;
 
-        // Name of place
-        const name = document.createElement(`span`);
-        name.className = `name`;
-        name.textContent = pair[0].name;
-        entry.appendChild(name);
-        // Neighborhood field is not always populated
-        if (pair[0].neighborhood) {
-            entry.innerHTML += ` in `;
-            const neighborhood = document.createElement(`span`);
-            neighborhood.className = `neighborhood`;
-            neighborhood.textContent = pair[0].neighborhood[0];
-            entry.appendChild(neighborhood);
-        }
+      // Name of place
+      const name = document.createElement(`span`);
+      name.className = `name`;
+      name.textContent = pair[0].name;
+      entry.appendChild(name);
+      // Neighborhood field is not always populated
+      if (pair[0].neighborhood) {
+        entry.innerHTML += ` in `;
+        const neighborhood = document.createElement(`span`);
+        neighborhood.className = `neighborhood`;
+        neighborhood.textContent = pair[0].neighborhood[0];
+        entry.appendChild(neighborhood);
+      }
 
-        entry.innerHTML += `<br>`;
+      entry.innerHTML += `<br>`;
 
-        // Building up address
-        const address = document.createElement(`span`);
-        address.className = `address`;
-        // Some landmarks have no number address
-        if (pair[0].address) address.textContent += `${pair[0].address}, `
-        address.textContent += `${pair[0].locality}, ${pair[0].region} ${pair[0].postcode}`;
+      // Building up address
+      const address = document.createElement(`span`);
+      address.className = `address`;
+      // Some landmarks have no number address
+      if (pair[0].address) address.textContent += `${pair[0].address}, `
+      address.textContent += `${pair[0].locality}, ${pair[0].region} ${pair[0].postcode}`;
 
-        // Appending divs to DOM
-        entry.appendChild(address);
-        places.appendChild(entry);
-        main.appendChild(places);
-    }); // Done adding places to DOM
-    // console.assert(document.getElementById("firstdate").className === `btn btnselected`, "First Date not selected");
-    // console.log(places);
-    // console.dirxml(places);
-    // console.dir(places);
-    // console.trace("Done adding places");
-    // console.timeEnd("Timing getting places");
-    // console.profileEnd();
+      // Appending divs to DOM
+      entry.appendChild(address);
+      places.appendChild(entry);
+      this.main.appendChild(places);
+    });
+  }
 }
-
-makeButtons([
-    [`firstdate`, `First Date`],
-    [`seconddate`, `Second Date`],
-    [`thirddate`, `Third Date`],
-    [`fourthdate`, `Fourth Date`],
-    [`fifthdate`, `Fifth Date`],
-    [`goingwell`, `Date Going Well`],
-    [`meat`, `Craving Meat`],
-    [`nomeat`, `Craving Veggies`],
-    [`largegroup`, `Large Group`],
-    [`nightout`, `Night Out`],
-    [`learn`, `Learn`],
-    [`allday`, `All Day Experience`],
-    [`nogoingback`, `No Going Back`],
-    [`nature`, `Nature`]//,
-    //[`sweettooth`, `Sweet Tooth`]
+const Ferris = new Itinerary();
+Ferris.createPic();
+Ferris.createBtnDiv();
+Ferris.makeButtons([
+  [`firstdate`, `First Date`],
+  [`seconddate`, `Second Date`],
+  [`thirddate`, `Third Date`],
+  [`fourthdate`, `Fourth Date`],
+  [`fifthdate`, `Fifth Date`],
+  [`goingwell`, `Date Going Well`],
+  [`meat`, `Craving Meat`],
+  [`nomeat`, `Craving Veggies`],
+  [`largegroup`, `Large Group`],
+  [`nightout`, `Night Out`],
+  [`learn`, `Learn`],
+  [`allday`, `All Day Experience`],
+  [`nogoingback`, `No Going Back`],
+  [`nature`, `Nature`]//,
+  //[`sweettooth`, `Sweet Tooth`]
 ]);
 
 // const sendPosition = (pos) => {
