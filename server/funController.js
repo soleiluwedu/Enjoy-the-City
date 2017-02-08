@@ -5,31 +5,33 @@ const Factual = require(`factual-api`);
 const factual = new Factual(`Jr4VU8j7IWGNP3P8tg2x21WVC58Opn0w7Zr5EUeo`, `rYkYbju3AROrBb3E4HM9PriEsCfrgzXvoTaQNJet`);
 
 const style = {
-    reset: `\x1b[0m`,
-    bold: `\x1b[1m`,
-    faint: `\x1b[2m`,
-    standout: `\x1b[3m`,
-    underline: `\x1b[4m`,
-    blink: `\x1b[5m`,
-    inverse: `\x1b[7m`,
-    hidden: `\x1b[8m`,
-    nostandout: `\x1b[23m`,
-    nounderline: `\x1b[24m`,
-    noblink: `\x1b[25m`,
-    noreverse: `\x1b[27m`,
-    black: `\x1b[30m`,
-    red: `\x1b[31m`,
-    green: `\x1b[32m`,
-    yellow: `\x1b[33m`,
-    blue: `\x1b[34m`,
-    magenta: `\x1b[35m`,
-    cyan: `\x1b[36m`,
-    white: `\x1b[37m`
+  reset: `\x1b[0m`,
+  bold: `\x1b[1m`,
+  faint: `\x1b[2m`,
+  standout: `\x1b[3m`,
+  underline: `\x1b[4m`,
+  blink: `\x1b[5m`,
+  inverse: `\x1b[7m`,
+  hidden: `\x1b[8m`,
+  nostandout: `\x1b[23m`,
+  nounderline: `\x1b[24m`,
+  noblink: `\x1b[25m`,
+  noreverse: `\x1b[27m`,
+  black: `\x1b[30m`,
+  red: `\x1b[31m`,
+  green: `\x1b[32m`,
+  yellow: `\x1b[33m`,
+  blue: `\x1b[34m`,
+  magenta: `\x1b[35m`,
+  cyan: `\x1b[36m`,
+  white: `\x1b[37m`
 }
 
 const funController = {
   getData: (req, res) => {
-    console.log(`✉️ ${style.green}${style.bold}GET${style.reset}${style.green} request received for ${style.red}${style.bold}${req.url}${style.reset}`)
+
+    console.log(`✉️ ${style.cyan}GET request received for ${style.red}${req.url}${style.reset}`)
+
     switch (req.url) {
       case `/firstdate`: findPlaces(res, [
         [342, `☕️ First date is the crazy-check. Start with a cafe.`],
@@ -43,7 +45,7 @@ const funController = {
           : [336, `🔮 See a psychic together.`],
         Math.ceil(Math.random() * 2) % 2 === 1
           ? [311, `🎟 Visit a museum.`]
-          : [331, `⛳ Go mini-golfing.`],
+          : [310, `🎨 Go to an art gallery.`],
         Math.ceil(Math.random() * 2) % 2 === 1
           ? [362, `🥙 Relax with some Middle Eastern cuisine.`]
           : [359, `🍱 Have some Japanese.`]
@@ -62,7 +64,7 @@ const funController = {
       case `/fourthdate`: findPlaces(res, [
         Math.ceil(Math.random() * 2) % 2 === 1
           ? [311, `🎟 Start the day at a museum.`]
-          : [331, `⛳ Start with mini-golf.`],
+          : [310, `🎨 Go to an art gallery.`],
         Math.ceil(Math.random() * 2) % 2 === 1
           ? [364, `🍤 Enjoy some seafood.`]
           : [366, `🍣 Enjoy sushi.`],
@@ -217,50 +219,31 @@ const funController = {
       case `/resort`: findPlaces(res, [438]); break;
       case `/golfcourse`: findPlaces(res, [451]); break;
       case `/arcade`: findPlaces(res, [463]); break;
-      default:
-        res.writeHead(404, { "Content-Type": `text/html` });
-        res.write(`Error 404. '${req.url}' not found.`);
-        res.end();
+      default: res.status(404).send(`Error 404. '${req.url}' not found.`);
     }
   }
 }
 
 // Gets data from Factual.com API and returns it to client
 const findPlaces = (res, codes) => {
-  const vows = codes.map(code => {
-    const oath = new Promise((resolve, reject) => {
-      factual.get(`/t/places-us`, { filters: { "$and": [{ locality: "los angeles", category_ids: { "$includes": code[0] } }] } }, (error, factualRes) => {
-        if (!error) resolve([factualRes, code[1]]);
-        else reject(error);
-      });
-    });
-    return oath;
-  });
-  // console.time(`⏰ ${style.magenta}Timing promises${style.reset}`);
+
+  const vows = codes.map(pair =>
+    new Promise((resolve, reject) => {
+      factual.get(
+        `/t/places-us`,
+        { filters: { "$and": [{ locality: "los angeles", category_ids: { "$includes": pair[0] } }] } },
+        (err, factRes) => !err ? resolve([factRes, pair[1]]) : reject(error)
+      );
+    })
+  );
+
   Promise.all(vows)
-    .then((factualRes) => {
-      return factualRes.map(pair => {
-        const pickOne = Math.floor(Math.random() * pair[0].data.length);
-        let venue = ``;
-        venue += pair[0].data[pickOne].name;
-        venue += pair[0].data[pickOne].neighborhood ? ` in ${pair[0].data[pickOne].neighborhood[0]}` : ``;
-        console.log(`${style.cyan}${venue}${style.reset}`);
-        return [pair[0].data[pickOne], pair[1]];
-      });
-    })
-    .then((results) => {
-      res.writeHead(200, { "Content-Type": `application/json` });
-      res.write(JSON.stringify(results));
-      res.end();
-      // console.trace("Promises resolved");
-      // console.timeEnd(`⏰ ${style.magenta}Timing promises${style.reset}`);
-    })
+    .then(factRes => res.json(factRes.map(pair => [pair[0].data[Math.floor(Math.random() * pair[0].data.length)], pair[1]])))
     .catch(err => {
       console.log(`❗️${style.bold}${style.red}${err}${style.reset}`);
-      res.writeHead(500, { "Content-Type": `text/html` });
-      res.write(err);
-      res.end();
+      res.send(err);
     });
+
 }
 
 module.exports = funController;
