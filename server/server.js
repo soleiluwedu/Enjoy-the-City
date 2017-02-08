@@ -31,7 +31,7 @@ const style = {
 
 app.use(express.static(path.join(__dirname, '../')));
 
-app.post('*', funController.postData);
+app.post('*', funController.getData);
 
 app.listen(PORT, () => { console.log(`🤘 ${style.bold}${style.blue}Ready to rock on port ${PORT}${style.reset}`) });
 

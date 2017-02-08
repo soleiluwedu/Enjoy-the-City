@@ -13,7 +13,7 @@ html, body {
 }
 
 #pic {
-    width: 420px;
+    width: 50%;
     border: solid 1px;
     border-color: midnightblue;
     display: block;
@@ -22,14 +22,14 @@ html, body {
 }
 
 #main {
-    width: 420px;
+    width: 50%;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
 #places {
-    width: 420px;
+    width: 100%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -39,6 +39,7 @@ html, body {
     width: 100%;
     display: block;
     margin: auto;
+    text-align: center;
 }
 
 .btn {

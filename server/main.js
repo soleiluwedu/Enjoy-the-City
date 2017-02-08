@@ -38,7 +38,7 @@ const makeButtons = (array) => {
             // console.log(`Button ${btnCreated.id} pressed`);
             // console.time("Timing getting places");
             // console.profile("Getting places");
-
+            // console.count("arbitrary label")
             // Removing previous loading or places divs if already present
             clearPlaces();
 
@@ -58,7 +58,7 @@ const makeButtons = (array) => {
             // Resetting button classes for highlighting purposes
             const allButtons = document.getElementsByClassName(`btn`);
             const abLength = allButtons.length;
-            for (let i = 0; i < abLength; i++) allButtons[i].className = `btn`
+            for (let i = 0; i < abLength; i++) allButtons[i].className = `btn`;
             btnCreated.className = `btn btnselected`;
             // Not choosing to use GPS location due to small radius of Factual.com API search
             // console.log("Retrieving location from Google Maps API to send...");
@@ -73,6 +73,8 @@ const makeButtons = (array) => {
 const showPlaces = (results) => {
     // Removing previous loading or places divs if already present
     clearPlaces();
+
+    // console.table(results);
 
     // Making new places div
     places = document.createElement(`div`);
@@ -122,7 +124,9 @@ const showPlaces = (results) => {
         main.appendChild(places);
     }); // Done adding places to DOM
     // console.assert(document.getElementById("firstdate").className === `btn btnselected`, "First Date not selected");
+    // console.log(places);
     // console.dirxml(places);
+    // console.dir(places);
     // console.trace("Done adding places");
     // console.timeEnd("Timing getting places");
     // console.profileEnd();

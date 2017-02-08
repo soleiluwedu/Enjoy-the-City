@@ -28,7 +28,7 @@ const style = {
 }
 
 const funController = {
-  postData: (req, res) => {
+  getData: (req, res) => {
     console.log(`✉️ ${style.green}${style.bold}POST${style.reset}${style.green} request received for ${style.red}${style.bold}${req.url}${style.reset}`)
     switch (req.url) {
       // Cafe, Skating
