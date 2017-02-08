@@ -3,25 +3,23 @@
 class Itinerary {
 
   constructor() {
-    this.main = document.getElementById(`main`);
-    this.allbtns = null;
-    this.lastBtnClicked = null;
-  }
 
-  createPic() {
     // Creating pic
     const pic = document.createElement(`img`);
     pic.id = `pic`;
     pic.src = `ferris.jpg`;
     document.getElementById(`top`).appendChild(pic);
-  }
 
-  createBtnDiv() {
     // Creating button div
     const btns = document.createElement(`div`);
     btns.id = `allbtns`;
     document.getElementById(`nav`).appendChild(btns);
+
+    // Pointers to DOM elements that will be manipulated
+    this.main = document.getElementById(`main`);
+    this.lastBtnClicked = null;
     this.allbtns = btns;
+
   }
 
   clearPlaces() {
@@ -124,9 +122,8 @@ class Itinerary {
     });
   }
 }
+
 const Ferris = new Itinerary();
-Ferris.createPic();
-Ferris.createBtnDiv();
 Ferris.makeButtons([
   [`firstdate`, `First Date`],
   [`seconddate`, `Second Date`],
