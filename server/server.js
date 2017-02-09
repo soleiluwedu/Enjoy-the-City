@@ -2,7 +2,9 @@
 
 const express = require('express');
 const app = express();
-const funController = require('./funController');
+const cli = require('./cli');
+const factualCodeController = require('./factualCodeController');
+const factualReqController = require('./factualReqController');
 const path = require('path');
 const PORT = 3000;
 
@@ -31,7 +33,7 @@ const style = {
 
 app.use(express.static(path.join(__dirname, '../')));
 
-app.get('*', funController.getData);
+app.get('*', cli.get, factualCodeController.getData, factualReqController.getVenues);
 
 app.listen(PORT, () => console.log(`🤘 ${style.magenta}${style.underline}Ready to rock on port ${PORT}${style.reset}`));
 
