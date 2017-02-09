@@ -2,144 +2,145 @@
 
 class Itinerary {
 
-  constructor() {
+	constructor() {
 
-    // Creating pic
-    const pic = document.createElement(`img`);
-    pic.id = `pic`;
-    pic.src = `ferris.jpg`;
-    document.getElementById(`top`).appendChild(pic);
+		// Creating pic
+		const pic = document.createElement(`img`);
+		pic.id = `pic`;
+		pic.src = `ferris.jpg`;
+		document.getElementById(`top`).appendChild(pic);
 
-    // Creating button div
-    const btns = document.createElement(`div`);
-    btns.id = `allbtns`;
-    document.getElementById(`nav`).appendChild(btns);
+		// Creating button div
+		const btns = document.createElement(`div`);
+		btns.id = `allbtns`;
+		document.getElementById(`nav`).appendChild(btns);
 
-    // Pointers to DOM elements that will be manipulated
-    this.main = document.getElementById(`main`);
-    this.lastBtnClicked = null;
-    this.allbtns = btns;
+		// Pointers to DOM elements that will be manipulated
+		this.main = document.getElementById(`main`);
+		this.lastBtnClicked = null;
+		this.allbtns = btns;
 
-  }
+	}
 
-  clearPlaces() {
-    // Clear out any Loading message or Places div
-    const loading = document.getElementById(`loading`);
-    if (loading) loading.remove();
-    const places = document.getElementById(`places`);
-    if (places) places.remove();
-  }
+	clearPlaces() {
+		// Clear out any Loading message or Places div
+		const loading = document.getElementById(`loading`);
+		if (loading) loading.remove();
+		const places = document.getElementById(`places`);
+		if (places) places.remove();
+	}
 
-  addLoadingMsg() {
-    // Add "Loading" message as a placeholder until data returns
-    const loading = document.createElement(`p`);
-    loading.id = `loading`;
-    loading.textContent = `⏰ Downloading data...`;
-    this.main.appendChild(loading);
-  }
+	addLoadingMsg() {
+		// Add "Loading" message as a placeholder until data returns
+		const loading = document.createElement(`p`);
+		loading.id = `loading`;
+		loading.textContent = `⏰ Downloading data...`;
+		this.main.appendChild(loading);
+	}
 
-  makeButtons(array) {
-    array.forEach(btnpair => {
-      const btnCreated = document.createElement(`button`);
-      btnCreated.textContent = btnpair[1];
-      btnCreated.className = `btn`;
-      btnCreated.id = btnpair[0];
+	makeButtons(array) {
+		array.forEach(btnpair => {
+			const btnCreated = document.createElement(`button`);
+			btnCreated.textContent = btnpair.desc;
+			btnCreated.className = `btn`;
+			btnCreated.id = btnpair.route;
 
-      // Button click listener
-      btnCreated.addEventListener(`click`, e => {
+			// Button click listener
+			btnCreated.addEventListener(`click`, e => {
 
-        this.clearPlaces();
+				this.clearPlaces();
 
-        this.addLoadingMsg();
+				this.addLoadingMsg();
 
-        // Sending request to Factual.com API for data
-        const xhr = new XMLHttpRequest();
-        xhr.open(`GET`, `/${btnpair[0]}`);
-        xhr.setRequestHeader("Content-type", "text/html");
-        xhr.onload = () => this.showPlaces(JSON.parse(xhr.responseText));
-        xhr.send();
+				// Sending request to Factual.com API for data
+				const xhr = new XMLHttpRequest();
+				xhr.open(`GET`, `/${btnpair.route}`);
+				xhr.setRequestHeader("Content-type", "text/html");
+				xhr.onload = () => this.showPlaces(JSON.parse(xhr.responseText));
+				xhr.send();
 
-        // Changing button classes for highlighting purposes
-        if (this.lastBtnClicked) this.lastBtnClicked.className = `btn`;
-        this.lastBtnClicked = btnCreated;
-        this.lastBtnClicked.className = `btn btnselected`;
+				// Changing button classes for highlighting purposes
+				if (this.lastBtnClicked) this.lastBtnClicked.className = `btn`;
+				this.lastBtnClicked = btnCreated;
+				this.lastBtnClicked.className = `btn btnselected`;
 
-        // Not choosing to use GPS location due to small radius of Factual.com API search
-        // console.log("Retrieving location from Google Maps API to send...");
-        // navigator.geolocation.getCurrentPosition(sendPosition, error);
-      })
-      // Append button to DOM
-      this.allbtns.appendChild(btnCreated);
-    });
-  }
+				// Not choosing to use GPS location due to small radius of Factual.com API search
+				// console.log("Retrieving location from Google Maps API to send...");
+				// navigator.geolocation.getCurrentPosition(sendPosition, error);
+			})
+			// Append button to DOM
+			this.allbtns.appendChild(btnCreated);
+		});
+	}
 
-  showPlaces(results) {
-    this.clearPlaces();
+	showPlaces(objArr) {
 
-    // Making new places div
-    const places = document.createElement(`div`);
-    places.id = `places`;
+		this.clearPlaces();
 
-    results.forEach(pair => {
+		// Making new places div
+		const places = document.createElement(`div`);
+		places.id = `places`;
 
-      const entry = document.createElement(`p`);
+		objArr.forEach(obj => {
 
-      // Description/comment (not from API)
-      const desc = document.createElement(`span`);
-      desc.className = `desc`;
-      desc.textContent = pair[1];
-      entry.appendChild(desc);
+			const entry = document.createElement(`p`);
 
-      entry.innerHTML += `<br>`;
+			// Description/comment (not from API)
+			const desc = document.createElement(`span`);
+			desc.className = `desc`;
+			desc.textContent = obj.desc;
+			entry.appendChild(desc);
 
-      // Name of place
-      const name = document.createElement(`span`);
-      name.className = `name`;
-      name.textContent = pair[0].name;
-      entry.appendChild(name);
-      // Neighborhood field is not always populated
-      if (pair[0].neighborhood) {
-        entry.innerHTML += ` in `;
-        const neighborhood = document.createElement(`span`);
-        neighborhood.className = `neighborhood`;
-        neighborhood.textContent = pair[0].neighborhood[0];
-        entry.appendChild(neighborhood);
-      }
+			entry.innerHTML += `<br>`;
 
-      entry.innerHTML += `<br>`;
+			// Name of place
+			const name = document.createElement(`span`);
+			name.className = `name`;
+			name.textContent = obj.venue.name;
+			entry.appendChild(name);
+			// Neighborhood field is not always populated
+			if (obj.venue.neighborhood) {
+				entry.innerHTML += ` in `;
+				const neighborhood = document.createElement(`span`);
+				neighborhood.className = `neighborhood`;
+				neighborhood.textContent = obj.venue.neighborhood[0];
+				entry.appendChild(neighborhood);
+			}
 
-      // Building up address
-      const address = document.createElement(`span`);
-      address.className = `address`;
-      // Some landmarks have no number address
-      if (pair[0].address) address.textContent += `${pair[0].address}, `
-      address.textContent += `${pair[0].locality}, ${pair[0].region} ${pair[0].postcode}`;
+			entry.innerHTML += `<br>`;
 
-      // Appending divs to DOM
-      entry.appendChild(address);
-      places.appendChild(entry);
-      this.main.appendChild(places);
-    });
-  }
+			// Building up address
+			const address = document.createElement(`span`);
+			address.className = `address`;
+			// Some landmarks have no number address
+			if (obj.venue.address) address.textContent += `${obj.venue.address}, `
+			address.textContent += `${obj.venue.locality}, ${obj.venue.region} ${obj.venue.postcode}`;
+
+			// Appending divs to DOM
+			entry.appendChild(address);
+			places.appendChild(entry);
+			this.main.appendChild(places);
+		});
+	}
 }
 
 const Ferris = new Itinerary();
 Ferris.makeButtons([
-  [`firstdate`, `First Date`],
-  [`seconddate`, `Second Date`],
-  [`thirddate`, `Third Date`],
-  [`fourthdate`, `Fourth Date`],
-  [`fifthdate`, `Fifth Date`],
-  [`goingwell`, `Date Going Well`],
-  [`meat`, `Craving Meat`],
-  [`nomeat`, `Craving Veggies`],
-  [`largegroup`, `Large Group`],
-  [`nightout`, `Night Out`],
-  [`learn`, `Learn`],
-  [`allday`, `All Day Experience`],
-  [`nogoingback`, `No Going Back`],
-  [`nature`, `Nature`]//,
-  //[`sweettooth`, `Sweet Tooth`]
+	{ route: `firstdate`, desc: `First Date` },
+	{ route: `seconddate`, desc: `Second Date` },
+	{ route: `thirddate`, desc: `Third Date` },
+	{ route: `fourthdate`, desc: `Fourth Date` },
+	{ route: `fifthdate`, desc: `Fifth Date` },
+	{ route: `goingwell`, desc: `Date Going Well` },
+	{ route: `meat`, desc: `Craving Meat` },
+	{ route: `nomeat`, desc: `Craving Veggies` },
+	{ route: `largegroup`, desc: `Large Group` },
+	{ route: `nightout`, desc: `Night Out` },
+	{ route: `learn`, desc: `Learn` },
+	{ route: `allday`, desc: `All Day Experience` },
+	{ route: `nogoingback`, desc: `No Going Back` },
+	{ route: `nature`, desc: `Nature` },
+	{ route: `sweettooth`, desc: `Sweet Tooth` }
 ]);
 
 // const sendPosition = (pos) => {
