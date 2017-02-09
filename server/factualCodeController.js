@@ -1,9 +1,5 @@
 `use strict`
 
-const request = require(`request`);
-const Factual = require(`factual-api`);
-const factual = new Factual(`Jr4VU8j7IWGNP3P8tg2x21WVC58Opn0w7Zr5EUeo`, `rYkYbju3AROrBb3E4HM9PriEsCfrgzXvoTaQNJet`);
-
 const factualCodes = {
 	landmark: 107,
 	garden: 109,
