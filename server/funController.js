@@ -232,13 +232,13 @@ const findPlaces = (res, codeDescArr) => {
 			factual.get(
 				`/t/places-us`,
 				{ filters: { "$and": [{ locality: "los angeles", category_ids: { "$includes": codeDesc.code } }] } },
-				(err, factResObj) => !err ? resolve({ data: factResObj.data, desc: codeDesc.desc }) : reject(error)
+				(err, factResObj) => !err ? resolve({ venues: factResObj.data, desc: codeDesc.desc }) : reject(error)
 			);
 		})
 	);
 
 	Promise.all(vows)
-		.then(objArr => res.json(objArr.map(obj => { return { venue: obj.data[Math.floor(Math.random() * obj.data.length)], desc: obj.desc } })))
+		.then(objArr => res.json(objArr.map(obj => { return { venue: obj.venues[Math.floor(Math.random() * obj.venues.length)], desc: obj.desc } })))
 		.catch(err => {
 			console.log(`❗️${style.bold}${style.red}${err}${style.reset}`);
 			res.send(err);
