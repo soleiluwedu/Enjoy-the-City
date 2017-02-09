@@ -35,6 +35,6 @@ app.use(express.static(path.join(__dirname, '../')));
 
 app.get('*', cli.get, factualCodeController.getData, factualReqController.getVenues, cli.error);
 
-app.listen(PORT, () => console.log(`🤘 ${style.magenta}${style.underline}Ready to rock on port ${PORT}${style.reset}`));
+app.listen(PORT, () => console.log(`🤘 ${style.bold}${style.underline}${style.blue}Ready to rock on port ${PORT}${style.reset}`));
 
 module.exports = app;
