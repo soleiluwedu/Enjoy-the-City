@@ -30,6 +30,10 @@ const cli = {
 	},
 	success: (req, res, next) => {
 		console.log(`📭 ${style.cyan}PAYLOAD delivered for GET request for ${style.red}${req.url}${style.reset}`);
+	},
+	error: (req, res, next) => {
+		console.log(`❗️${style.bold}${style.red}${req.params.err.message}${style.reset}`);
+		return res.send(req.params.err);
 	}
 }
 

@@ -33,7 +33,7 @@ const style = {
 
 app.use(express.static(path.join(__dirname, '../')));
 
-app.get('*', cli.get, factualCodeController.getData, factualReqController.getVenues);
+app.get('*', cli.get, factualCodeController.getData, factualReqController.getVenues, cli.error);
 
 app.listen(PORT, () => console.log(`🤘 ${style.magenta}${style.underline}Ready to rock on port ${PORT}${style.reset}`));
 
