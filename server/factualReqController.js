@@ -45,6 +45,7 @@ const factualReqController = {
 				next();
 			})
 			.catch(err => {
+				res.send(err);
 				req.params.err = err;
 				next();
 			});

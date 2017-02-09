@@ -29,11 +29,8 @@ const cli = {
 		next();
 	},
 	response: (req, res, next) => {
-		if (req.params.err) {
-			console.log(`❗️${style.bold}${style.red}${req.params.err.message}${style.reset}`);
-			return res.send(req.params.err);
-		}
-		console.log(`🌰 ${style.cyan}PAYLOAD delivered for GET request for ${style.red}${req.url}${style.reset}`);
+		if (req.params.err) console.log(`❗️${style.bold}${style.red}${req.params.err.message}${style.reset}`);
+		else console.log(`🌰 ${style.cyan}PAYLOAD delivered for GET request for ${style.red}${req.url}${style.reset}`);
 	}
 }
 
