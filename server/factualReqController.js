@@ -40,7 +40,10 @@ const factualReqController = {
 			})
 		);
 		Promise.all(vows)
-			.then(objArr => res.json(objArr.map(obj => { return { venue: obj.venues[Math.floor(Math.random() * obj.venues.length)], desc: obj.desc } })))
+			.then(objArr => {
+				res.json(objArr.map(obj => { return { venue: obj.venues[Math.floor(Math.random() * obj.venues.length)], desc: obj.desc } }));
+				next();
+			})
 			.catch(err => {
 				req.params.err = err;
 				next();

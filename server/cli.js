@@ -24,16 +24,16 @@ const style = {
 }
 
 const cli = {
-	get: (req, res, next) => {
-		console.log(`📫 ${style.cyan}GET request received for ${style.red}${req.url}${style.reset}`);
+	request: (req, res, next) => {
+		console.log(`🐿 ${style.cyan}${req.method} request received for ${style.red}${req.url}${style.reset}`);
 		next();
 	},
-	success: (req, res, next) => {
-		console.log(`📭 ${style.cyan}PAYLOAD delivered for GET request for ${style.red}${req.url}${style.reset}`);
-	},
-	error: (req, res, next) => {
-		console.log(`❗️${style.bold}${style.red}${req.params.err.message}${style.reset}`);
-		return res.send(req.params.err);
+	response: (req, res, next) => {
+		if (req.params.err) {
+			console.log(`❗️${style.bold}${style.red}${req.params.err.message}${style.reset}`);
+			return res.send(req.params.err);
+		}
+		console.log(`🌰 ${style.cyan}PAYLOAD delivered for GET request for ${style.red}${req.url}${style.reset}`);
 	}
 }
 
