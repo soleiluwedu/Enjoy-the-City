@@ -29,8 +29,8 @@ const style = {
 
 // Gets data from Factual.com API and returns it to client.
 const factualReqController = {
-  getVenues: (req, res, next) => {
-    if (req.params.err) return next();
+	getVenues: (req, res, next) => {
+		if (res.locals.err) return next();
 		const vows = req.params.codesToReq.map(codeDesc =>
 			new Promise((resolve, reject) => {
 				factual.get(
@@ -47,7 +47,7 @@ const factualReqController = {
 			})
 			.catch(err => {
 				res.send(err);
-				req.params.err = err;
+				res.locals.err = err;
 				return next();
 			});
 	}
