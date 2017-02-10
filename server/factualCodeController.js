@@ -192,7 +192,7 @@ const routesAndCodes = {
 }
 
 const factualCodeController = {
-	getData: (req, res, next) => {
+	setCodes: (req, res, next) => {
 		if (res.locals.err) return next();
 		const route = req.url.slice(1);
 		if (route in routesAndCodes) req.params.codesToReq = routesAndCodes[route];
