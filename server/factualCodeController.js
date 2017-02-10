@@ -191,13 +191,16 @@ const routesAndCodes = {
   ]
 }
 
-
 const factualCodeController = {
   getData: (req, res, next) => {
+    if (req.params.err) return next();
     const route = req.url.slice(1);
     if (route in routesAndCodes) req.params.codesToReq = routesAndCodes[route];
-    else return res.status(404).send(`Error 404. '${req.url}' not found.`);
-    next();
+    else {
+      res.status(404).send(`Error 404. Route '${req.url}' not found.`);
+      req.params.err = { message: `Error 404 sent to client. Route '${req.url}' not found.` };
+    }
+    return next();
   }
 }
 

@@ -26,7 +26,7 @@ const style = {
 const cli = {
 	request: (req, res, next) => {
 		console.log(`🐿 ${style.cyan}${req.method} request received for ${style.red}${req.url}${style.reset}`);
-		next();
+		return next();
 	},
 	response: (req, res, next) => {
 		if (req.params.err) console.log(`❗️${style.bold}${style.red}${req.params.err.message}${style.reset}`);
