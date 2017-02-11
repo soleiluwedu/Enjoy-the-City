@@ -1,16 +1,6 @@
 `use strict`
 
-/*
-
-BgBlack = "\x1b[40m"
-BgRed = "\x1b[41m"
-BgGreen = "\x1b[42m"
-BgYellow = "\x1b[43m"
-BgBlue = "\x1b[44m"
-BgMagenta = "\x1b[45m"
-BgCyan = "\x1b[46m"
-BgWhite = "\x1b[47m"
-*/
+// cli object contains methods to print serverside console messages.
 
 const style = {
 	reset: `\x1b[0m`,
@@ -44,10 +34,14 @@ const style = {
 }
 
 const cli = {
+	// Console log request method and route.
 	request: (req, res, next) => {
 		console.log(`🐿 ${style.cyan}${req.method} request received for ${style.red}${req.url}${style.reset}`);
 		return next();
 	},
+
+	// Check res.locals.err for an object with an error message (must update controllers to conform) and
+	// prints error if it exists. Else, assume successful delivery of payload and console log confirmation.
 	response: (req, res, next) => {
 		if (res.locals.err) console.log(`❗ ${style.bold}${style.red}${res.locals.err.message}${style.reset}`);
 		else console.log(`🌰 ${style.cyan}PAYLOAD delivered for GET request for ${style.red}${req.url}${style.reset}`);
