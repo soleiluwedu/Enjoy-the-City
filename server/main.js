@@ -4,12 +4,6 @@ class Itinerary {
 
 	constructor() {
 
-		// Loading pic.
-		const pic = document.createElement(`img`);
-		pic.id = `pic`;
-		pic.src = `ferris.jpg`;
-		document.getElementById(`top`).appendChild(pic);
-
 		// Creating button div.
 		const btns = document.createElement(`div`);
 		btns.id = `allbtns`;
@@ -20,6 +14,14 @@ class Itinerary {
 		this.lastBtnClicked = null;
 		this.allbtns = btns;
 
+	}
+
+	// Loads picture and appends to the DOM.
+	loadPic(picUrl) {
+		const pic = document.createElement(`img`);
+		pic.id = `pic`;
+		pic.src = picUrl;
+		document.getElementById(`top`).appendChild(pic);
 	}
 
 	clearPlaces() {
@@ -126,10 +128,13 @@ class Itinerary {
 	}
 }
 
-// Instantiating Itinerary class.
+// Instantiate Itinerary class.
 const Ferris = new Itinerary();
 
-// Making buttons.
+// Load picture of Ferris, Sloan, and Cameron.
+Ferris.loadPic(`ferris.jpg`);
+
+// Make buttons.
 Ferris.makeButtons([
 	{ route: `firstdate`, desc: `First Date` },
 	{ route: `seconddate`, desc: `Second Date` },
