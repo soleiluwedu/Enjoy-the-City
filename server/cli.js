@@ -40,8 +40,8 @@ const cli = {
 		return next();
 	},
 
-	// Check res.locals.err for an object with an error message (must update controllers to conform) and
-	// prints error if it exists. Else, assume successful delivery of payload and console log confirmation.
+	// Check res.locals.err for an error object (must update controllers to conform) and console log
+	// error message. If no error, assume successful delivery of payload and console log confirmation.
 	response: (req, res, next) => {
 		if (res.locals.err) console.log(`❗ ${style.bold}${style.red}${res.locals.err.message}${style.reset}`);
 		else console.log(`🌰 ${style.cyan}PAYLOAD delivered for GET request for ${style.red}${req.url}${style.reset}`);
