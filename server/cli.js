@@ -29,7 +29,7 @@ const cli = {
 		return next();
 	},
 	response: (req, res, next) => {
-		if (res.locals.err) console.log(`❗${style.bold}${style.red}${res.locals.err.message}${style.reset}`);
+		if (res.locals.err) console.log(`❗ ${style.bold}${style.red}${res.locals.err.message}${style.reset}`);
 		else console.log(`🌰 ${style.cyan}PAYLOAD delivered for GET request for ${style.red}${req.url}${style.reset}`);
 	}
 }
