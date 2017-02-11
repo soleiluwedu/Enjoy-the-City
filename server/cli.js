@@ -46,6 +46,7 @@ const cli = {
 
 	// Check res.locals.err for an error object (must update controllers to conform) and console log
 	// error message. If no error, assume successful delivery of payload and console log confirmation.
+	// As this is meant to be the last middleware, it does not call next().
 	response: (req, res, next) => {
 		if (res.locals.err) console.log(`❗ ${style.red}${res.locals.err.message}${style.reset}`);
 		else console.log(`🌰 ${style.cyan}PAYLOAD delivered for GET request for ${style.red}${req.url}${style.reset}`);
