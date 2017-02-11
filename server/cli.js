@@ -1,5 +1,17 @@
 `use strict`
 
+/*
+
+BgBlack = "\x1b[40m"
+BgRed = "\x1b[41m"
+BgGreen = "\x1b[42m"
+BgYellow = "\x1b[43m"
+BgBlue = "\x1b[44m"
+BgMagenta = "\x1b[45m"
+BgCyan = "\x1b[46m"
+BgWhite = "\x1b[47m"
+*/
+
 const style = {
 	reset: `\x1b[0m`,
 	bold: `\x1b[1m`,
@@ -20,7 +32,15 @@ const style = {
 	blue: `\x1b[34m`,
 	magenta: `\x1b[35m`,
 	cyan: `\x1b[36m`,
-	white: `\x1b[37m`
+	white: `\x1b[37m`,
+	bg_black: `\x1b[40m`,
+	bg_red: `\x1b[41m`,
+	bg_green: `\x1b[42m`,
+	bg_yellow: `\x1b[43m`,
+	bg_blue: `\x1b[44m`,
+	bg_magenta: `\x1b[45m`,
+	bg_cyan: `\x1b[46m`,
+	bg_white: `\x1b[47m`
 }
 
 const cli = {
