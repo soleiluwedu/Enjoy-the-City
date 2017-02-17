@@ -57,7 +57,7 @@ class Itinerary {
 				// Sending request to Factual.com API for data.
 				const xhr = new XMLHttpRequest();
 				xhr.open(`GET`, `/${btnpair.route}`);
-				xhr.setRequestHeader("Content-type", "text/html");
+				xhr.setRequestHeader("Content-type", "application/json");
 				xhr.onload = () => this.showPlaces(JSON.parse(xhr.responseText));
 				xhr.send();
 
