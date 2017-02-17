@@ -1,8 +1,8 @@
 {
-  "name": "unit-9-node-api",
+  "name": "list-is-short",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "nodemon server/server.js"
   },
