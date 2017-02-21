@@ -1,5 +1,5 @@
 `use strict`
-
+const util = require('util');
 // cli object contains methods to print serverside console messages.
 
 const style = {
@@ -41,13 +41,7 @@ const cli = {
 	// Console log request method and route.
 	request: (req, res, next) => {
 		console.log(`🐿 ${style.cyan}${req.method} request received for ${style.red}${req.url}${style.reset}`);
-		if (req.method === 'POST') {
-			console.log(`💃🏼 ${style.cyan}req.body:`);
-			for (let key in req.body) {
-				console.log(`req.body.${key}: ${req.body.key}`);
-			}
-			console.log(`${style.reset}`);
-		}
+		if (req.method === `POST`) console.log(`💃🏼 ${style.cyan}req.body: ${util.inspect(req.body)}${style.reset}`);
 		return next();
 	},
 
