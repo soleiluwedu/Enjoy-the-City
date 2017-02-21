@@ -149,7 +149,7 @@ const routesAndCodes = {
 	],
 	largegroup: [
 		{ code: factualCodes.beach, desc: `🏖 How about the beach?` },
-		{ code: factualCodes.park, desc: `🏕 Or maybe the park?` },
+		{ code: factualCodes.park, desc: `🏕 Have fun at the park.` },
 		{ code: factualCodes.lounge, desc: `🛋 Maybe chill at a lounge.` },
 		{ code: factualCodes.movie, desc: `🎞 Don't feel like talking to everyone? See a movie.` }
 	],

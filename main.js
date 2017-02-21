@@ -116,6 +116,9 @@ class Itinerary {
 		// Creating div to show all suggested venues.
 		objArr.forEach(obj => {
 
+			// Return if no venue.
+			if (!obj.venue) return;
+
 			const entry = document.createElement(`p`);
 
 			// Description of venue suggestion (not from API).
