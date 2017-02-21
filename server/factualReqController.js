@@ -12,7 +12,7 @@ const factualReqController = {
 			new Promise((resolve, reject) => {
 				factual.get(
 					`/t/places-us`,
-					{ filters: { "$and": [{ locality: "los angeles", category_ids: { "$includes": codeDesc.code } }] } },
+					{ filters: { "$and": [{ locality: req.body.locality, category_ids: { "$includes": codeDesc.code } }] } },
 					(err, factResObj) => !err ? resolve({ venues: factResObj.data, desc: codeDesc.desc }) : reject(err)
 				);
 			})

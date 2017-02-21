@@ -4,16 +4,31 @@ class Itinerary {
 
 	constructor() {
 
+		// Creating locality div.
+		const localityDiv = document.createElement(`div`);
+		localityDiv.id = `locality`;
+		const localityLabel = document.createElement(`p`);
+		localityLabel.id = `localitylbl`
+		localityLabel.textContent = `Locality:`;
+		const localityInput = document.createElement(`input`);
+		localityInput.id = `localityinput`;
+		localityInput.setAttribute(`type`, `text`);
+
+		// Appending to DOM
+		localityDiv.appendChild(localityLabel);
+		localityDiv.appendChild(localityInput);
+		document.getElementById(`interface`).appendChild(localityDiv);
+
 		// Creating button div.
 		const btns = document.createElement(`div`);
 		btns.id = `allbtns`;
-		document.getElementById(`nav`).appendChild(btns);
+		document.getElementById(`interface`).appendChild(btns);
 
 		// Pointers to DOM elements that will be manipulated.
 		this.main = document.getElementById(`main`);
+		this.locality = localityInput;
 		this.lastBtnClicked = null;
 		this.allbtns = btns;
-
 	}
 
 	// Loads picture and appends to the DOM.
@@ -53,13 +68,12 @@ class Itinerary {
 				this.clearPlaces();
 
 				this.addLoadingMsg();
-
 				// Sending request to Factual.com API for data.
-				const xhr = new XMLHttpRequest();
-				xhr.open(`GET`, `/${btnpair.route}`);
-				xhr.setRequestHeader("Content-type", "application/json");
-				xhr.onload = () => this.showPlaces(JSON.parse(xhr.responseText));
-				xhr.send();
+				const x = new XMLHttpRequest();
+				x.open(`POST`, `/${btnpair.route}`, true);
+				x.setRequestHeader("Content-type", "application/json");
+				x.onload = () => this.showPlaces(JSON.parse(x.responseText));
+				x.send(`locality=${this.locality.value}`);
 
 				// Changing button classes for highlighting purposes.
 				if (this.lastBtnClicked) this.lastBtnClicked.className = `btn`;

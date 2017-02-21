@@ -1,90 +1,116 @@
 html, body {
-    margin: 0;
-    padding: 0;
-    background-color: #336699;
-    font-family: Arial;
-    color: #aaaaaa
+		margin: 0;
+		padding: 0;
+		background-color: black;
+		font-family: Arial;
+		color: #aaaaaa
 }
 
 #top {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-align: center;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		text-align: center;
 }
 
 #pic {
-    width: 50%;
-    border: solid 1px;
-    border-color: midnightblue;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+		width: 50%;
+		border: solid 1px;
+		border-color: cornflowerblue;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
 }
 
-#main {
-    width: 50%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+#locality {
+		margin: 20px;
 }
 
-#places {
-    width: 100%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+#localitylbl {
+		display: block;
+		font-size: 20px;
+		color: mediumspringgreen;
+		margin: 5px auto;
+		text-align: center;
+}
+
+input[type=text] {
+		display: block;
+		font-size: 15px;
+		background-color: black;
+		color: mediumspringgreen;
+		border: 1px solid lightskyblue;
+		border-radius: 4px;
+		padding: 4px;
+		margin: auto;
+		outline: none;
 }
 
 #allbtns {
-    width: 100%;
-    display: block;
-    margin: auto;
-    text-align: center;
+		width: 100%;
+		display: block;
+		margin: auto;
+		text-align: center;
 }
 
 .btn {
-    margin: 1px;
-    background-color: slateblue;
-    border: solid 1px;
-    border-color: darkslateblue;
-    border-radius: 3px;
-    outline: none;
+		font-size: 15px;
+		margin: 1px;
+		background-color: slateblue;
+		border: solid 1px;
+		border-color: darkslateblue;
+		border-radius: 3px;
+		outline: none;
 }
 
 .btn:hover {
-    border-color: lightblue;
+		border-color: lightblue;
 }
 
 .btnselected {
-    margin: 1px;
-    background-color: salmon;
-    border: solid 1px;
-    border-color: darksalmon;
-    border-radius: 3px;
-    outline: none;
+		margin: 1px;
+		background-color: salmon;
+		border: solid 1px;
+		border-color: darksalmon;
+		border-radius: 3px;
+		outline: none;
 }
 
+#main {
+		width: 50%;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+}
+
+#places {
+		width: 100%;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+}
+
+
 #loading {
-    color: #cccccc;
-    width: 50%;
-    text-align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+		color: #cccccc;
+		width: 50%;
+		text-align: center;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
 }
 
 .desc {
-    color: #ffaa99
+		color: #ffaa99
 }
 
 .name {
-    color: #99ccff
+		color: #99ccff
 }
 
 .neighborhood {
-    color: #ff9900
+		color: #ff9900
 }
 
 .address {
-    color: #33cc99
+		color: #33cc99
 }
