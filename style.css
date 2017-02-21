@@ -89,10 +89,18 @@ input[type=text] {
 		margin-right: auto;
 }
 
-
 #loading {
 		color: #cccccc;
 		width: 50%;
+		text-align: center;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+}
+
+#error {
+		color: mediumvioletred;
+		width: 100%;
 		text-align: center;
 		display: block;
 		margin-left: auto;

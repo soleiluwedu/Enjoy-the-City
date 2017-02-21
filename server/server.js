@@ -10,6 +10,7 @@ const path = require('path');
 const PORT = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../')));
 
 app.post('*', cli.request, factualCodeController.setCodes, factualReqController.getVenues, cli.response);

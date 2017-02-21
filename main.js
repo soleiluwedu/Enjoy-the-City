@@ -9,7 +9,7 @@ class Itinerary {
 		localityDiv.id = `locality`;
 		const localityLabel = document.createElement(`p`);
 		localityLabel.id = `localitylbl`
-		localityLabel.textContent = `Locality:`;
+		localityLabel.textContent = `City:`;
 		const localityInput = document.createElement(`input`);
 		localityInput.id = `localityinput`;
 		localityInput.setAttribute(`type`, `text`);
@@ -39,20 +39,30 @@ class Itinerary {
 		document.getElementById(`top`).appendChild(pic);
 	}
 
+	// Clear out any Loading message or Places div.
 	clearPlaces() {
-		// Clear out any Loading message or Places div.
 		const loading = document.getElementById(`loading`);
 		if (loading) loading.remove();
 		const places = document.getElementById(`places`);
 		if (places) places.remove();
+		const error = document.getElementById(`error`);
+		if (error) error.remove();
 	}
 
+	// Add Loading message as a placeholder until data returns.
 	addLoadingMsg() {
-		// Add Loading message as a placeholder until data returns.
 		const loading = document.createElement(`p`);
 		loading.id = `loading`;
 		loading.textContent = `⏰ Downloading data...`;
 		this.main.appendChild(loading);
+	}
+
+	// Adds an error message div to the main area.
+	errorMsg(message) {
+		const error = document.createElement(`p`);
+		error.id = `error`;
+		error.textContent = `❗${message}`;
+		this.main.appendChild(error);
 	}
 
 	makeButtons(array) {
@@ -65,15 +75,20 @@ class Itinerary {
 			// Button click listener.
 			btnCreated.addEventListener(`click`, e => {
 
+				// Clear anything already in the places div.
 				this.clearPlaces();
 
+				// Check for value in locality text input.
+				if (this.locality.value === '') return this.errorMsg(`Please type a city into the field above.`);
+
+				// Add temporary loading message.
 				this.addLoadingMsg();
 				// Sending request to Factual.com API for data.
 				const x = new XMLHttpRequest();
 				x.open(`POST`, `/${btnpair.route}`, true);
 				x.setRequestHeader("Content-type", "application/json");
 				x.onload = () => this.showPlaces(JSON.parse(x.responseText));
-				x.send(`locality=${this.locality.value}`);
+				x.send(JSON.stringify({ locality: this.locality.value }));
 
 				// Changing button classes for highlighting purposes.
 				if (this.lastBtnClicked) this.lastBtnClicked.className = `btn`;
