@@ -3,7 +3,7 @@ html, body {
 		padding: 0;
 		background-color: black;
 		font-family: Arial;
-		color: #aaaaaa
+		color: lightslategrey
 }
 
 #top {
@@ -108,17 +108,17 @@ input[type=text] {
 }
 
 .desc {
-		color: #ffaa99
+		color: lightsalmon;
 }
 
 .name {
-		color: #99ccff
+		color: skyblue;
 }
 
 .neighborhood {
-		color: #ff9900
+		color: deeppink;
 }
 
 .address {
-		color: #33cc99
+		color: lightseagreen;
 }
