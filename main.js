@@ -9,7 +9,7 @@ class Itinerary {
 		localityDiv.id = `locality`;
 		const localityLabel = document.createElement(`p`);
 		localityLabel.id = `localitylbl`
-		localityLabel.textContent = `City:`;
+		localityLabel.textContent = `Enjoy the City:`;
 		const localityInput = document.createElement(`input`);
 		localityInput.id = `localityinput`;
 		localityInput.setAttribute(`type`, `text`);
