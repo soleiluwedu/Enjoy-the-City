@@ -1,5 +1,7 @@
 `use strict`
 
+// ES6 class Itinerary has functionality to load a main picture,
+// make buttons to request routes, and show venues on the DOM.
 class Itinerary {
 
 	constructor() {
@@ -65,12 +67,14 @@ class Itinerary {
 		this.main.appendChild(error);
 	}
 
+	// Generate buttons from array of objects, each object with route and description.
 	makeButtons(routeDescArr) {
 
 		// Creating button div.
 		const allbtns = document.createElement(`div`);
 		allbtns.id = `allbtns`;
 
+		// For each route/description object in the array...
 		routeDescArr.forEach(btnpair => {
 			const btnCreated = document.createElement(`button`);
 			btnCreated.textContent = btnpair.desc;
@@ -106,10 +110,12 @@ class Itinerary {
 			// Append button to allbtns div.
 			allbtns.appendChild(btnCreated);
 		});
+
 		// Append allbtns div to DOM.
 		document.getElementById(`interface`).appendChild(allbtns);
 	}
 
+	// Accepts array of object, each object with venue information, and shows the info on the DOM.
 	showPlaces(objArr) {
 
 		// Clear any existing Loading message or Places div.
@@ -141,6 +147,7 @@ class Itinerary {
 			name.className = `name`;
 			name.textContent = obj.venue.name;
 			entry.appendChild(name);
+
 			// Neighborhood field is not always populated.
 			if (obj.venue.neighborhood) {
 				entry.innerHTML += ` in `;
@@ -167,7 +174,7 @@ class Itinerary {
 	}
 }
 
-// Instantiate Itinerary class.
+// Instantiate object of Itinerary class. Named after Ferris Bueller's Day Off.
 const Ferris = new Itinerary();
 
 // Load picture of Ferris, Sloan, and Cameron.
