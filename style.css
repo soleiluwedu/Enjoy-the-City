@@ -1,4 +1,4 @@
-html, body, p {
+html, body {
 	margin: 0;
 	padding: 0;
 	background-color: black;
@@ -20,7 +20,7 @@ html, body, p {
 	margin-right: auto;
 }
 
-#creditfactual {
+#creditfactual p {
 	margin: 0 auto;
 	width: 50%;
 	font-size: 10px;
