@@ -1,1 +1,9 @@
-Life Is Short generates a list of places to visit by selecting random venues from appropriate categories. For example, if the user is going on a first date, the user would click on the button titled "First Date" and received a random roller skating rink or a random arcade venue, along with a random casual restaurant. If the user clicks on "Large Group", Life Is Short will complile a list of places that large groups can go to, like a random park, a random beach, and a random movie theater. The user simply must decide what type of outing (date, friendly hangout, eating a lot of food, etc.) the user wishes to partake in, and Life Is Short will compile a list of places to go based on that choice. Clicking the same button again will generate a new list of random venues in the same categories.
+Introduction:
+
+Enjoy the City generates a list of places to visit by selecting random venues from categories appropriate to the type of outing the user is in the mood for.
+
+Usage:
+
+1) Enter the name of the city to find venues in.
+2) Click the button most appropriate the type of outing you wish to partake in.
+3) Clicking the same button again will retrieve new randomized venues within the same categories.
