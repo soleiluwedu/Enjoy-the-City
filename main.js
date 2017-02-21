@@ -55,7 +55,7 @@ class Itinerary {
 	addLoadingMsg() {
 		const loading = document.createElement(`p`);
 		loading.id = `loading`;
-		loading.textContent = `⏰ Downloading data...`;
+		loading.textContent = `📡 Searching for data...`;
 		this.main.appendChild(loading);
 	}
 
