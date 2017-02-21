@@ -1,6 +1,8 @@
 `use strict`
-const util = require('util');
+
 // cli object contains methods to print serverside console messages.
+
+const util = require('util');
 
 const style = {
 	reset: `\x1b[0m`,
