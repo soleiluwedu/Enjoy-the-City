@@ -106,6 +106,9 @@ class Itinerary {
 
 	showPlaces(objArr) {
 
+		// Trimming input for neatness.
+		this.locality.value = this.locality.value.trim();
+
 		// Clear any existing Loading message or Places div.
 		this.clearPlaces();
 
@@ -119,6 +122,7 @@ class Itinerary {
 			// Return if no venue.
 			if (!obj.venue) return;
 
+			// Begin constructing venue entry.
 			const entry = document.createElement(`p`);
 
 			// Description of venue suggestion (not from API).

@@ -54,25 +54,22 @@ input[type=text] {
 
 .btn {
 		font-size: 15px;
+		color: cornflowerblue;
 		margin: 1px;
-		background-color: slateblue;
+		background-color: black;
 		border: solid 1px;
-		border-color: darkslateblue;
+		border-color: cornflowerblue;
 		border-radius: 3px;
 		outline: none;
 }
 
 .btn:hover {
-		border-color: lightblue;
+		border-color: mediumspringgreen;
 }
 
 .btnselected {
-		margin: 1px;
-		background-color: salmon;
-		border: solid 1px;
-		border-color: darksalmon;
-		border-radius: 3px;
-		outline: none;
+		color: mediumspringgreen;
+		border-color: mediumspringgreen;
 }
 
 #main {
