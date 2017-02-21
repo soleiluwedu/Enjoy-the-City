@@ -42,8 +42,10 @@ const cli = {
 
 	// Console log request method and route.
 	request: (req, res, next) => {
-		console.log(`🐿 ${style.cyan}${req.method} request received for ${style.red}${req.url}${style.reset}`);
-		if (req.method === `POST`) console.log(`💃🏼 ${style.cyan}req.body: ${util.inspect(req.body)}${style.reset}`);
+		let logmsg = `🐿 ${style.cyan}${req.method} request received for ${style.red}${req.url}`;
+		if (req.method === `POST`) logmsg += ` ${style.magenta}req.body: ${util.inspect(req.body)}`;
+		logmsg += `${style.reset}`;
+		console.log(logmsg);
 		return next();
 	},
 
