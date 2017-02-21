@@ -9,7 +9,7 @@ class Itinerary {
 		localityDiv.id = `locality`;
 		const localityLabel = document.createElement(`p`);
 		localityLabel.id = `localitylbl`
-		localityLabel.textContent = `Enjoy the City:`;
+		localityLabel.textContent = `Explore the City:`;
 		const localityInput = document.createElement(`input`);
 		localityInput.id = `localityinput`;
 		localityInput.setAttribute(`type`, `text`);
@@ -97,10 +97,6 @@ class Itinerary {
 				if (this.lastBtnClicked) this.lastBtnClicked.className = `btn`;
 				this.lastBtnClicked = btnCreated;
 				this.lastBtnClicked.className = `btn btnselected`;
-
-				// Not choosing to use GPS location due to small radius of Factual.com API search.
-				// console.log("Retrieving location from Google Maps API to send...");
-				// navigator.geolocation.getCurrentPosition(sendPosition, error);
 			})
 			// Append button to DOM.
 			this.allbtns.appendChild(btnCreated);
@@ -188,16 +184,3 @@ Ferris.makeButtons([
 	{ route: `nature`, desc: `Nature` },
 	{ route: `sweettooth`, desc: `Sweet Tooth` }
 ]);
-
-// const sendPosition = (pos) => {
-//     const lat = pos.coords.latitude;
-//     const long = pos.coords.longitutde;
-//     console.log(`Location obtained from Google Maps API. Sending position object: ${pos}`)
-//     const xml = new XMLHttpRequest();
-//     xml.open(`POST`, { url: `/firstdate`, lat: lat, long: long });
-//     xml.setRequestHeader(`Content-type`, `application/json`);
-//     xml.onLoad = (results) => { showPlaces(results) }
-//     xml.send();
-// }
-
-// const error = (err) => { console.error(`ERROR getting geolocation (Code ${err.code} ): ${err.message}`) };
