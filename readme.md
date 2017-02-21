@@ -1,6 +1,6 @@
 # Introduction
 
-Enjoy the City interacts with the Factual.com API to generate a list of places to visit by selecting random venues from categories appropriate to the type of outing the user is in the mood for.
+Explore the City interacts with the Factual.com API to generate a list of places to visit by selecting random venues from categories appropriate to the type of outing the user is in the mood for.
 
 # Usage
 

@@ -4,6 +4,12 @@ class Itinerary {
 
 	constructor() {
 
+		// Crediting Factual.com.
+		const creditFactualDiv = document.getElementById(`creditfactual`);
+		const creditFactualText = document.createElement(`p`);
+		creditFactualText.textContent = `Powered by the Factual.com API`;
+		creditFactualDiv.appendChild(creditFactualText);
+
 		// Creating locality div.
 		const localityDiv = document.createElement(`div`);
 		localityDiv.id = `locality`;
@@ -19,16 +25,10 @@ class Itinerary {
 		localityDiv.appendChild(localityInput);
 		document.getElementById(`interface`).appendChild(localityDiv);
 
-		// Creating button div.
-		const btns = document.createElement(`div`);
-		btns.id = `allbtns`;
-		document.getElementById(`interface`).appendChild(btns);
-
 		// Pointers to DOM elements that will be manipulated.
 		this.main = document.getElementById(`main`);
 		this.locality = localityInput;
 		this.lastBtnClicked = null;
-		this.allbtns = btns;
 	}
 
 	// Loads picture and appends to the DOM.
@@ -65,8 +65,13 @@ class Itinerary {
 		this.main.appendChild(error);
 	}
 
-	makeButtons(array) {
-		array.forEach(btnpair => {
+	makeButtons(routeDescArr) {
+
+		// Creating button div.
+		const allbtns = document.createElement(`div`);
+		allbtns.id = `allbtns`;
+
+		routeDescArr.forEach(btnpair => {
 			const btnCreated = document.createElement(`button`);
 			btnCreated.textContent = btnpair.desc;
 			btnCreated.className = `btn`;
@@ -98,9 +103,11 @@ class Itinerary {
 				this.lastBtnClicked = btnCreated;
 				this.lastBtnClicked.className = `btn btnselected`;
 			})
-			// Append button to DOM.
-			this.allbtns.appendChild(btnCreated);
+			// Append button to allbtns div.
+			allbtns.appendChild(btnCreated);
 		});
+		// Append allbtns div to DOM.
+		document.getElementById(`interface`).appendChild(allbtns);
 	}
 
 	showPlaces(objArr) {
