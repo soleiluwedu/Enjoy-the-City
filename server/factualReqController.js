@@ -8,7 +8,7 @@ const factual = new Factual(`Jr4VU8j7IWGNP3P8tg2x21WVC58Opn0w7Zr5EUeo`, `rYkYbju
 const factualReqController = {
 	getVenues: (req, res, next) => {
 		if (res.locals.err) return next();
-		const vows = req.params.codesToReq.map(codeDesc =>
+		const vows = res.locals.codesToReq.map(codeDesc =>
 			new Promise((resolve, reject) => {
 				factual.get(
 					`/t/places-us`,

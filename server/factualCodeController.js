@@ -195,7 +195,7 @@ const factualCodeController = {
 	setCodes: (req, res, next) => {
 		if (res.locals.err) return next();
 		const route = req.url.slice(1);
-		if (route in routesAndCodes) req.params.codesToReq = routesAndCodes[route];
+		if (route in routesAndCodes) res.locals.codesToReq = routesAndCodes[route];
 		else {
 			res.status(404).send(`Error 404. Route '${req.url}' not found.`);
 			res.locals.err = { message: `Error 404 sent to client. Route '${req.url}' not found.` };
