@@ -9,7 +9,7 @@ class Itinerary {
 		// Crediting Factual.com.
 		const creditFactualDiv = document.getElementById(`creditfactual`);
 		const creditFactualText = document.createElement(`p`);
-		creditFactualText.textContent = `Powered by the Factual.com API`;
+		creditFactualText.textContent = `Powered by the Factual.com Places API`;
 		creditFactualDiv.appendChild(creditFactualText);
 
 		// Creating locality div.

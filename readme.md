@@ -1,6 +1,6 @@
 # Introduction
 
-Explore the City interacts with the Factual.com API to generate an itinerary for the user to explore a given city in the United States.
+Explore the City interacts with the Factual.com Places API to generate an itinerary for the user to explore a given city in the United States.
 
 # Usage
 
