@@ -39,7 +39,7 @@ const style = {
 
 const cli = {
 	// Console log message indicating that the server is listening on a specified port.
-	listenPort: (port) => console.log(`🤘 ${style.green}${style.underline}Ready to rock on port ${port}${style.reset}`),
+	listenPort: (port) => console.log(`🤘 ${style.green}${style.underline}ready to rock on port ${port}${style.reset}`),
 
 	// Console log request method and route.
 	request: (req, res, next) => {
