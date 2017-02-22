@@ -22,7 +22,7 @@ class Itinerary {
 		localityInput.id = `localityinput`;
 		localityInput.setAttribute(`type`, `text`);
 
-		// Appending to DOM
+		// Appending locality div to DOM.
 		localityDiv.appendChild(localityLabel);
 		localityDiv.appendChild(localityInput);
 		document.getElementById(`interface`).appendChild(localityDiv);
