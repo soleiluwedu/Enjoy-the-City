@@ -6,39 +6,36 @@ class Itinerary {
 
 	constructor() {
 
-		// Crediting Factual.com.
-		const creditFactualDiv = document.getElementById('creditfactual');
-		const creditFactualText = document.createElement('p');
-		creditFactualText.textContent = 'Powered by the Factual.com Places API';
-		creditFactualDiv.appendChild(creditFactualText);
 
 		// Creating locality div.
 		const localityDiv = document.createElement('div');
 		localityDiv.id = 'locality';
+
+		// Locality label.
 		const localityLabel = document.createElement('p');
-		localityLabel.id = 'localitylbl'
+		localityLabel.id = 'localitylbl';
 		localityLabel.textContent = 'Explore the City:';
+
+		// Locality input text field.
 		const localityInput = document.createElement('input');
 		localityInput.id = 'localityinput';
 		localityInput.setAttribute('type', 'text');
 
+		// Crediting Factual.com Places API.
+		const creditFactualText = document.createElement('p');
+		creditFactualText.id = 'creditfactual';
+		creditFactualText.textContent = 'Powered by the Factual.com Places API';
+
 		// Appending locality div to DOM.
 		localityDiv.appendChild(localityLabel);
 		localityDiv.appendChild(localityInput);
+		localityDiv.appendChild(creditFactualText);
 		document.getElementById('interface').appendChild(localityDiv);
 
 		// Pointers to DOM elements that will be manipulated.
 		this.main = document.getElementById('main');
 		this.locality = localityInput;
 		this.lastBtnClicked = null;
-	}
-
-	// Loads picture and appends to the DOM.
-	loadPic(picUrl) {
-		const pic = document.createElement('img');
-		pic.id = 'pic';
-		pic.src = picUrl;
-		document.getElementById('top').appendChild(pic);
 	}
 
 	// Clear out any Loading message or Places div.
@@ -183,9 +180,6 @@ class Itinerary {
 
 // Instantiate object of Itinerary class. Named after Ferris Bueller's Day Off.
 const Ferris = new Itinerary();
-
-// Load picture of Ferris, Sloan, and Cameron.
-Ferris.loadPic('ferris.jpg');
 
 // Make buttons.
 Ferris.makeButtons([
