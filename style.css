@@ -1,9 +1,9 @@
 html, body {
+	background-color: black;
+	color: lightgoldenrodyellow;
+	font-family: Quicksand;
 	margin: 0;
 	padding: 0;
-	background-color: black;
-	font-family: Arial;
-	color: lightgoldenrodyellow;
 }
 
 #top {
@@ -12,19 +12,19 @@ html, body {
 }
 
 #pic {
-	width: 50%;
 	border: solid 1px;
 	border-color: cornflowerblue;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+	width: 50%;
 }
 
 #creditfactual p {
-	margin: 0 auto;
-	width: 50%;
 	font-size: 10px;
+	margin: 0 auto;
 	text-align: right;
+	width: 50%;
 }
 
 #locality {
@@ -32,82 +32,84 @@ html, body {
 }
 
 #localitylbl {
+	color: mediumspringgreen;
 	display: block;
 	font-size: 20px;
-	color: mediumspringgreen;
 	margin: 5px auto;
 	text-align: center;
 }
 
 input[type=text] {
-	display: block;
 	background-color: black;
-	font-size: 15px;
-	color: mediumspringgreen;
 	border: 1px solid lightskyblue;
 	border-radius: 4px;
-	padding: 4px;
+	color: mediumspringgreen;
+	display: block;
+	font-family: Quicksand;
+	font-size: 15px;
 	margin: auto;
 	outline: none;
+	padding: 4px;
 }
 
 #allbtns {
-	width: 100%;
 	display: block;
 	margin: auto;
 	text-align: center;
+	width: 100%;
 }
 
 .btn {
-	font-size: 15px;
-	color: cornflowerblue;
-	margin: 1px;
 	background-color: black;
 	border: solid 1px;
 	border-color: cornflowerblue;
 	border-radius: 3px;
+	color: cornflowerblue;
+	font-family: Quicksand;
+	font-size: 15px;
+	margin: 1px;
 	outline: none;
 }
 
 .btn:hover {
-	color: lightseagreen;
 	border-color: lightseagreen;
+	color: lightseagreen;
 }
 
 .btnselected {
-	color: mediumvioletred;
 	border-color: mediumvioletred;
+	color: mediumvioletred;
 }
 
 #main {
-	width: 50%;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+	width: 50%;
 }
 
 #places {
-	width: 100%;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+	width: 100%;
 }
 
 #loading {
-	width: 50%;
-	text-align: center;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+	text-align: center;
+	width: 50%;
 }
 
 #error {
 	color: mediumvioletred;
-	width: 100%;
-	text-align: center;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+	text-align: center;
+	width: 100%;
 }
 
 .desc {
