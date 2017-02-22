@@ -18,9 +18,9 @@ html, body {
 }
 
 #localitylbl {
-	color: mediumspringgreen;
+	color: deepskyblue;
 	display: block;
-	font-size: 20px;
+	font-size: 30px;
 	margin: 5px auto;
 	text-align: center;
 }
@@ -34,13 +34,14 @@ input[type=text] {
 	background-color: black;
 	border: 1px solid lightskyblue;
 	border-radius: 4px;
-	color: mediumspringgreen;
+	color: springgreen;
 	display: block;
 	font-family: Quicksand;
-	font-size: 15px;
+	font-size: 20px;
 	margin: auto;
 	outline: none;
 	padding: 4px;
+	text-align: center;
 }
 
 #allbtns {
