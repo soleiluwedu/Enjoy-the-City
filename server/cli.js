@@ -38,24 +38,42 @@ const style = {
 }
 
 const cli = {
-	// Console log message indicating that the server is listening on a specified port.
+	// Log message indicating that the server is listening on a specified port.
 	listenPort: (port) => console.log(`🤘 ${style.green}${style.underline}ready to rock on port ${port}${style.reset}`),
 
-	// Console log request method and route.
+	// Log request method and route.
 	request: (req, res, next) => {
+
+		// Begin log message with req.method and req.url.
 		let logmsg = `🐿 ${style.cyan}[${req.method} ${style.red}${req.url}${style.cyan}]`;
-		if (req.method === `POST`) logmsg += ` ${style.magenta}req.body: ${util.inspect(req.body)}`;
+
+		// Log req.params if more than one key-value pair (req.params always has '0': /req.url)
+		if (Object.keys(req.params).length > 1) logmsg += ` ${style.yellow}req.params: ${util.inspect(req.params)}`;
+
+		// Log req.query if more than zero key-value pairs.
+		if (Object.keys(req.query).length > 0) logmsg += ` ${style.blue}req.query: ${util.inspect(req.query)}`;
+
+		// Log req.body if more than zero key-value pairs.
+		if (Object.keys(req.body).length > 0) logmsg += ` ${style.magenta}req.body: ${util.inspect(req.body)}`;
+
+		// Reset styles and log the message.
 		logmsg += `${style.reset}`;
 		console.log(logmsg);
+
+		// Move to next middleware.
 		return next();
 	},
 
-	// Check res.locals.err for an error object (must update controllers to conform) and console log
-	// error message. If no error, assume successful delivery of payload and console log confirmation.
-	// As this is meant to be the last middleware, it does not call next().
+	// Log final result of dealing with request.
 	response: (req, res, next) => {
+
+		// Check res.locals.err for an error object (must update controllers to conform).
 		if (res.locals.err) console.log(`❗ ${style.red}${res.locals.err.message}${style.reset}`);
+
+		// If no error, assume successful delivery of payload and log confirmation.
 		else console.log(`🌰 ${style.cyan}[${req.method} ${style.red}${req.url}${style.cyan}] payload delivered.${style.reset}`);
+
+		// As this is meant to be the last middleware, it does not call next().
 	}
 }
 
