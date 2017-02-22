@@ -43,7 +43,7 @@ const cli = {
 
 	// Console log request method and route.
 	request: (req, res, next) => {
-		let logmsg = `🐿 ${style.cyan}${req.method} request received for ${style.red}${req.url}`;
+		let logmsg = `🐿 ${style.cyan}[${req.method} ${style.red}${req.url}${style.cyan}]`;
 		if (req.method === `POST`) logmsg += ` ${style.magenta}req.body: ${util.inspect(req.body)}`;
 		logmsg += `${style.reset}`;
 		console.log(logmsg);
@@ -55,7 +55,7 @@ const cli = {
 	// As this is meant to be the last middleware, it does not call next().
 	response: (req, res, next) => {
 		if (res.locals.err) console.log(`❗ ${style.red}${res.locals.err.message}${style.reset}`);
-		else console.log(`🌰 ${style.cyan}PAYLOAD delivered for ${req.method} request for ${style.red}${req.url}${style.reset}`);
+		else console.log(`🌰 ${style.cyan}[${req.method} ${style.red}${req.url}${style.cyan}] payload delivered.${style.reset}`);
 	}
 }
 
