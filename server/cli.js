@@ -4,6 +4,7 @@
 
 const util = require('util');
 
+// Style codes.
 const style = {
 	reset: `\x1b[0m`,
 	bright: `\x1b[1m`,

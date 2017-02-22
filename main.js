@@ -95,6 +95,7 @@ class Itinerary {
 
 				// Add temporary loading message.
 				this.addLoadingMsg();
+
 				// Sending request to Factual.com API for data.
 				const x = new XMLHttpRequest();
 				x.open(`POST`, `/${btnpair.route}`, true);
@@ -107,6 +108,7 @@ class Itinerary {
 				this.lastBtnClicked = btnCreated;
 				this.lastBtnClicked.className = `btn btnselected`;
 			})
+
 			// Append button to allbtns div.
 			allbtns.appendChild(btnCreated);
 		});
