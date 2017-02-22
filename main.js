@@ -24,7 +24,7 @@ class Itinerary {
 		// Crediting Factual.com Places API.
 		const creditFactualText = document.createElement('p');
 		creditFactualText.id = 'creditfactual';
-		creditFactualText.textContent = 'Powered by the Factual.com Places API';
+		creditFactualText.innerHTML = 'Presented by Thai-Duong Nguyen<br>Powered by the Factual.com Places API';
 
 		// Appending locality div to DOM.
 		localityDiv.appendChild(localityLabel);
