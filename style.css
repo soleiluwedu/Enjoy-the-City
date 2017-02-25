@@ -73,35 +73,19 @@ input[type=text] {
 	color: mediumvioletred;
 }
 
-#main {
-	display: block;
+#main, #places, #loading, #error {
+	display: table;
 	margin-left: auto;
 	margin-right: auto;
-	width: fit-content;
-}
-
-#places {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: fit-content;
 }
 
 #loading {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
 	text-align: center;
-	width: fit-content;
 }
 
 #error {
 	color: mediumvioletred;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
 	text-align: center;
-	width: fit-content;
 }
 
 .desc {
