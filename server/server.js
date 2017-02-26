@@ -13,6 +13,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../')));
 
+// All GET requests route to the main page.
+app.get('*', (req, res, next) => res.redirect('/'));
+
 // All routes begin and end with the serverside logger for report of requests and resolutions.
 app.post('*', serverReporter.request, factualCodeCtrl.setCodes, factualReqCtrl.getVenues, serverReporter.response);
 
