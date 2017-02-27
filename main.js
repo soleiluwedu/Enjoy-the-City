@@ -6,7 +6,6 @@ class Itinerary {
 
 	constructor() {
 
-
 		// Creating locality div.
 		const localityDiv = document.createElement('div');
 		localityDiv.id = 'locality';
@@ -21,15 +20,15 @@ class Itinerary {
 		localityInput.id = 'localityinput';
 		localityInput.setAttribute('type', 'text');
 
-		// Crediting Factual.com Places API.
-		const creditFactualText = document.createElement('p');
-		creditFactualText.id = 'creditfactual';
-		creditFactualText.innerHTML = 'Presented by Thai-Duong Nguyen<br>Powered by the Factual.com Places API';
+		// Credit div.
+		const credit = document.createElement('p');
+		credit.id = 'credit';
+		credit.innerHTML = 'Presented by Thai-Duong Nguyen<br>Powered by the Factual.com Places API';
 
 		// Appending locality div to DOM.
 		localityDiv.appendChild(localityLabel);
 		localityDiv.appendChild(localityInput);
-		localityDiv.appendChild(creditFactualText);
+		localityDiv.appendChild(credit);
 		document.getElementById('interface').appendChild(localityDiv);
 
 		// Pointers to DOM elements that will be manipulated.
@@ -38,14 +37,9 @@ class Itinerary {
 		this.lastBtnClicked = null;
 	}
 
-	// Clear out any Loading message or Places div.
-	clearPlaces() {
-		const loading = document.getElementById('loading');
-		if (loading) loading.remove();
-		const places = document.getElementById('places');
-		if (places) places.remove();
-		const error = document.getElementById('error');
-		if (error) error.remove();
+	// Clear out main div.
+	clearMain() {
+		this.main.textContent = null;
 	}
 
 	// Add Loading message as a placeholder until data returns.
@@ -58,7 +52,7 @@ class Itinerary {
 
 	// Adds an error message div to the main area.
 	errorMsg(message) {
-		this.clearPlaces();
+		this.clearMain();
 		const error = document.createElement('p');
 		error.id = 'error';
 		error.textContent = `❗${message}`;
@@ -85,8 +79,8 @@ class Itinerary {
 				// Trimming input for neatness.
 				this.locality.value = this.locality.value.trim();
 
-				// Clear anything already in the places div.
-				this.clearPlaces();
+				// Clear out main div.
+				this.clearMain();
 
 				// Check for value in locality text input.
 				if (this.locality.value === '') return this.errorMsg('Please type a city into the field above.');
@@ -122,10 +116,10 @@ class Itinerary {
 	// Accepts array of object, each object with venue information, and shows the info on the DOM.
 	showPlaces(objArr) {
 
-		// Clear any existing Loading message or Places div.
-		this.clearPlaces();
+		// Clear out main div.
+		this.clearMain();
 
-		// Making new Places div.
+		// Making new places div.
 		const places = document.createElement('div');
 		places.id = 'places';
 
@@ -170,11 +164,12 @@ class Itinerary {
 			if (obj.venue.address) address.textContent += `${obj.venue.address}, `
 			address.textContent += `${obj.venue.locality}, ${obj.venue.region} ${obj.venue.postcode}`;
 
-			// Appending Places div to DOM.
+			// Appending address span to entry div and entry div to places div.
 			entry.appendChild(address);
 			places.appendChild(entry);
-			this.main.appendChild(places);
 		});
+		// Appending places div to DOM.
+		this.main.appendChild(places);
 	}
 }
 

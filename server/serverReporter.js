@@ -46,7 +46,7 @@ const serverReporter = {
 	request: (req, res, next) => {
 
 		// Begin log message with req.method and req.url.
-		let logmsg = `🐿 ${style.cyan}[${req.method} ${style.yellow}${req.url}${style.cyan}]`;
+		let logmsg = `${style.cyan}[${req.method} ${style.yellow}${req.url}${style.cyan}]`;
 
 		// Log req.params if more than one key-value pair (req.params always has '0': /req.url)
 		if (Object.keys(req.params).length > 1) logmsg += ` ${style.yellow}req.params: ${util.inspect(req.params)}`;
@@ -69,10 +69,11 @@ const serverReporter = {
 	response: (req, res, next) => {
 
 		// Check res.locals.err for an error object (must update controllers to conform).
-		if (res.locals.err) console.log(`❗ ${style.cyan}[${req.method} ${style.yellow}${req.url}${style.cyan}] ${style.red}${res.locals.err.message}${style.reset}`);
+		if (res.locals.err) return console.log(`❗ ${style.cyan}[${req.method} ${style.yellow}${req.url}${style.cyan}] ${style.red}${res.locals.err.message}${style.reset}`);
 
-		// If no error, assume successful delivery of payload and log confirmation.
-		else console.log(`🌰 ${style.cyan}[${req.method} ${style.yellow}${req.url}${style.cyan}] payload delivered.${style.reset}`);
+		// If no error, assume successful delivery of payload and log confirmation. Check for custom msg in res.locals.successMsg first.
+		const logmsg = res.locals.successMsg ? res.locals.successMsg : 'payload delivered';
+		console.log(`${style.cyan}[${req.method} ${style.yellow}${req.url}${style.cyan}] ${logmsg}${style.reset}`);
 
 		// As this is meant to be the last middleware, it does not call next().
 	}
