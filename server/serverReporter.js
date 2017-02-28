@@ -3,7 +3,7 @@
 // util used for logging objects on the request object.
 const util = require('util');
 
-// Style codes.
+// Style codes for the terminal.
 const style = {
 	reset: '\x1b[0m',
 	bright: '\x1b[1m',
@@ -36,30 +36,69 @@ const style = {
 	bg_white: '\x1b[47m'
 }
 
+// Style associations.
+const msgDecor = {
+	default: `${style.cyan}`,
+	error: `${style.red}`,
+	port: `${style.green}${style.underline}`,
+	url: `${style.yellow}`,
+	brackets: `${style.cyan}`,
+	reqMETHOD: `${style.cyan}`,
+	reqPARAMS: `${style.yellow}`,
+	reqQUERY: `${style.blue}`,
+	reqBODY: `${style.magenta}`
+}
+
+const stylized = {
+	default: (string) => `${msgDecor.default}${string}${style.reset}`,
+	error: (string) => `${msgDecor.error}${string}${style.reset}`,
+	port: (string) => `${msgDecor.port}${string}${style.reset}`,
+	url: (string) => `${msgDecor.url}${string}${style.reset}`,
+	reqMETHOD: (string) => `${msgDecor.reqMETHOD}${string}${style.reset}`,
+	reqPARAMS: (string) => `${msgDecor.reqPARAMS}${string}${style.reset}`,
+	reqQUERY: (string) => `${msgDecor.reqQUERY}${string}${style.reset}`,
+	reqBODY: (string) => `${msgDecor.reqBODY}${string}${style.reset}`
+}
+
+const syntax = {
+	brackets: (string) => `${msgDecor.brackets}[${style.reset}${string}${msgDecor.brackets}]${style.reset}`,
+}
+
+const reqLog = {
+	// Returns stylized string containing info from req.method and req.url.
+	basic: (req) => `${syntax.brackets(`${stylized.reqMETHOD(req.method)} ${stylized.url(req.url)}`)}`,
+
+	// Returns stylized string containing info from from req.params, req.query, and req.body.
+	additional: (req) => {
+		let reqInfo = '';
+		// req.params always has '0': /req.url
+		if (Object.keys(req.params).length > 1) reqInfo += ` ${stylized.reqPARAMS(`req.params: ${util.inspect(req.params)}`)}`;
+		if (Object.keys(req.query).length > 0) reqInfo += ` ${stylized.reqQUERY(`req.query: ${util.inspect(req.query)}`)}`;
+		if (Object.keys(req.body).length > 0) reqInfo += ` ${stylized.reqBODY(`req.body: ${util.inspect(req.body)}`)}`;
+		return reqInfo.trim();
+	}
+}
+
+const actions = {
+	print: (logmsg) => console.log(logmsg)
+}
+
 // serverReporter object contains methods to print serverside console messages.
 const serverReporter = {
 
 	// Log message indicating that the server is listening on a specified port.
-	listenPort: (port) => console.log(`🤘 ${style.green}${style.underline}ready to rock on port ${port}${style.reset}`),
+	listenPort: (port) => actions.print(stylized.port(`🤘 ready to rock on port ${port}`)),
 
 	// Log request method and route.
 	request: (req, res, next) => {
 
-		// Begin log message with req.method and req.url.
-		let logmsg = `${style.cyan}[${req.method} ${style.yellow}${req.url}${style.cyan}]`;
+		// Log message will have two parts:
+		// 1) basic info (req.method and req.url)
+		// 2) additional info (req.params, req.query, req.body).
+		const logmsg = `${reqLog.basic(req)} ${stylized.default(`request received`)} ${reqLog.additional(req)}`;
 
-		// Log req.params if more than one key-value pair (req.params always has '0': /req.url)
-		if (Object.keys(req.params).length > 1) logmsg += ` ${style.yellow}req.params: ${util.inspect(req.params)}`;
-
-		// Log req.query if more than zero key-value pairs.
-		if (Object.keys(req.query).length > 0) logmsg += ` ${style.blue}req.query: ${util.inspect(req.query)}`;
-
-		// Log req.body if more than zero key-value pairs.
-		if (Object.keys(req.body).length > 0) logmsg += ` ${style.magenta}req.body: ${util.inspect(req.body)}`;
-
-		// Reset styles and log the message.
-		logmsg += `${style.reset}`;
-		console.log(logmsg);
+		// Log message.
+		actions.print(logmsg);
 
 		// Move to next middleware.
 		return next();
@@ -69,11 +108,14 @@ const serverReporter = {
 	response: (req, res, next) => {
 
 		// Check res.locals.err for an error object (must update controllers to conform).
-		if (res.locals.err) return console.log(`❗ ${style.cyan}[${req.method} ${style.yellow}${req.url}${style.cyan}] ${style.red}${res.locals.err.message}${style.reset}`);
-
+		if (res.locals.err) {
+			actions.print(`❗ ${stylized.error(res.locals.err.message)}`);
+		}
 		// If no error, assume successful delivery of payload and log confirmation. Check for custom msg in res.locals.successMsg first.
-		const logmsg = res.locals.successMsg ? res.locals.successMsg : 'payload delivered';
-		console.log(`${style.cyan}[${req.method} ${style.yellow}${req.url}${style.cyan}] ${logmsg}${style.reset}`);
+		else {
+			const logmsg = res.locals.successMsg ? res.locals.successMsg : 'payload delivered';
+			actions.print(`${reqLog.basic(req)} ${stylized.default(logmsg)}`);
+		}
 
 		// As this is meant to be the last middleware, it does not call next().
 	}
