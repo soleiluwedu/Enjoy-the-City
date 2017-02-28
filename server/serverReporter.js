@@ -3,8 +3,8 @@
 // util used for logging objects on the request object.
 const util = require('util');
 
-// Style codes for the terminal.
-const style = {
+// ansi style codes for the terminal.
+const ansi = {
 	reset: '\x1b[0m',
 	bright: '\x1b[1m',
 	dim: '\x1b[2m',
@@ -36,20 +36,26 @@ const style = {
 	bg_white: '\x1b[47m'
 }
 
+// Change this variable to point to another color code object
+// if your terminal uses a different color code scheme.
+var style = ansi;
+
 // Style associations.
 const msgDecor = {
+	brackets: `${style.cyan}${style.bright}`,
 	default: `${style.cyan}`,
 	error: `${style.red}`,
 	port: `${style.green}${style.underline}`,
 	url: `${style.yellow}`,
-	brackets: `${style.cyan}`,
 	reqMETHOD: `${style.cyan}`,
 	reqPARAMS: `${style.yellow}`,
 	reqQUERY: `${style.blue}`,
 	reqBODY: `${style.magenta}`
 }
 
+// stylized object contains functions that accept strings and returns stylized strings.
 const stylized = {
+	brackets: (string) => `${msgDecor.brackets}[${style.reset}${string}${msgDecor.brackets}]${style.reset}`,
 	default: (string) => `${msgDecor.default}${string}${style.reset}`,
 	error: (string) => `${msgDecor.error}${string}${style.reset}`,
 	port: (string) => `${msgDecor.port}${string}${style.reset}`,
@@ -60,30 +66,28 @@ const stylized = {
 	reqBODY: (string) => `${msgDecor.reqBODY}${string}${style.reset}`
 }
 
-const syntax = {
-	brackets: (string) => `${msgDecor.brackets}[${style.reset}${string}${msgDecor.brackets}]${style.reset}`,
-}
-
+// reqLog object contains functions that accept a request object and generates strings from parts of the request object.
 const reqLog = {
 	// Returns stylized string containing info from req.method and req.url.
-	basic: (req) => `${syntax.brackets(`${stylized.reqMETHOD(req.method)} ${stylized.url(req.url)}`)}`,
+	basic: (req) => `${stylized.brackets(`${stylized.reqMETHOD(req.method)} ${stylized.url(req.url)}`)}`,
 
 	// Returns stylized string containing info from from req.params, req.query, and req.body.
 	additional: (req) => {
 		let reqInfo = '';
 		// req.params always has '0': /req.url
-		if (Object.keys(req.params).length > 1) reqInfo += ` ${stylized.reqPARAMS(`req.params: ${util.inspect(req.params)}`)}`;
+		if (Object.keys(req.params).length > 1) reqInfo += `${stylized.reqPARAMS(`req.params: ${util.inspect(req.params)}`)}`;
 		if (Object.keys(req.query).length > 0) reqInfo += ` ${stylized.reqQUERY(`req.query: ${util.inspect(req.query)}`)}`;
 		if (Object.keys(req.body).length > 0) reqInfo += ` ${stylized.reqBODY(`req.body: ${util.inspect(req.body)}`)}`;
 		return reqInfo.trim();
 	}
 }
 
+// actions object contains functions that deliver final actions, such as logging messages or saving files.
 const actions = {
 	print: (logmsg) => console.log(logmsg)
 }
 
-// serverReporter object contains methods to print serverside console messages.
+// serverReporter object serves as the main API.
 const serverReporter = {
 
 	// Log message indicating that the server is listening on a specified port.
