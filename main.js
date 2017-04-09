@@ -90,7 +90,7 @@ class Itinerary {
 
         // Sending request to Factual.com API for data.
         const vanilla = new XMLHttpRequest;
-        vanilla.open('POST', `/${btnpair.route}`, true);
+        vanilla.open('POST', btnpair.route, true);
         vanilla.setRequestHeader("Content-type", "application/json");
         vanilla.onload = () => {
           const response = JSON.parse(vanilla.responseText);
@@ -178,19 +178,19 @@ const Ferris = new Itinerary();
 
 // Make buttons.
 Ferris.makeButtons([
-  { route: 'firstdate', desc: 'First Date' },
-  { route: 'seconddate', desc: 'Second Date' },
-  { route: 'thirddate', desc: 'Third Date' },
-  { route: 'fourthdate', desc: 'Fourth Date' },
-  { route: 'fifthdate', desc: 'Fifth Date' },
-  { route: 'goingwell', desc: 'Date Going Well' },
-  { route: 'meat', desc: 'Craving Meat' },
-  { route: 'nomeat', desc: 'Craving Veggies' },
-  { route: 'largegroup', desc: 'Large Group' },
-  { route: 'nightout', desc: 'Night Out' },
-  { route: 'learn', desc: 'Learn' },
-  { route: 'allday', desc: 'All Day Experience' },
-  { route: 'nogoingback', desc: 'No Going Back' },
-  { route: 'nature', desc: 'Nature' },
-  { route: 'sweettooth', desc: 'Sweet Tooth' }
+  { route: '/firstdate', desc: 'First Date' },
+  { route: '/seconddate', desc: 'Second Date' },
+  { route: '/thirddate', desc: 'Third Date' },
+  { route: '/fourthdate', desc: 'Fourth Date' },
+  { route: '/fifthdate', desc: 'Fifth Date' },
+  { route: '/goingwell', desc: 'Date Going Well' },
+  { route: '/meat', desc: 'Craving Meat' },
+  { route: '/nomeat', desc: 'Craving Veggies' },
+  { route: '/largegroup', desc: 'Large Group' },
+  { route: '/nightout', desc: 'Night Out' },
+  { route: '/learn', desc: 'Learn' },
+  { route: '/allday', desc: 'All Day Experience' },
+  { route: '/nogoingback', desc: 'No Going Back' },
+  { route: '/nature', desc: 'Nature' },
+  { route: '/sweettooth', desc: 'Sweet Tooth' }
 ]);
