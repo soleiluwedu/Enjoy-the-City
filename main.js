@@ -1,7 +1,6 @@
 'use strict'
 
-// ES6 class Itinerary has functionality to load a main picture,
-// make buttons to request routes, and show venues on the DOM.
+// ES6 class Itinerary.
 class Itinerary {
 
   constructor() {
@@ -174,7 +173,7 @@ class Itinerary {
 }
 
 // Instantiate object of Itinerary class. Named after Ferris Bueller's Day Off.
-const Ferris = new Itinerary();
+const Ferris = new Itinerary;
 
 // Make buttons.
 Ferris.makeButtons([
