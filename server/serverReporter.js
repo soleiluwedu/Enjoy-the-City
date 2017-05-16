@@ -1,7 +1,7 @@
 'use strict'
 
 // util used for logging objects on the request object.
-const stringify = require('./stringify');
+const unlace = require('./unlace');
 
 // ansi 16 color style codes for the terminal.
 const ansi16 = {
@@ -108,9 +108,9 @@ const reqLog = {
 	additional: (req) => {
 		let reqInfo = '';
 		// req.params always has '0': /req.url
-		if (Object.keys(req.params).length > 1) reqInfo += `${stylized.reqPARAMS(`req.params: ${stringify(req.params)}`)}`;
-		if (Object.keys(req.query).length > 0) reqInfo += ` ${stylized.reqQUERY(`req.query: ${stringify(req.query)}`)}`;
-		if (Object.keys(req.body).length > 0) reqInfo += ` ${stylized.reqBODY(`req.body: ${stringify(req.body)}`)}`;
+		if (Object.keys(req.params).length > 1) reqInfo += `${stylized.reqPARAMS(`req.params: ${unlace(req.params)}`)}`;
+		if (Object.keys(req.query).length > 0) reqInfo += ` ${stylized.reqQUERY(`req.query: ${unlace(req.query)}`)}`;
+		if (Object.keys(req.body).length > 0) reqInfo += ` ${stylized.reqBODY(`req.body: ${unlace(req.body)}`)}`;
 		return reqInfo.trim();
 	}
 }

@@ -1,5 +1,5 @@
 // Stringify data.
-function stringify(data) {
+function unlace(data) {
 
   // These data types do not have toString() functionality and do not render properly to a React DOM.
   switch (data) {
@@ -14,21 +14,18 @@ function stringify(data) {
 
       case 'object':
         // Recursive stringify any nested Array instances.
-        if (Array.isArray(data)) return `[${data.map((e, i) => (i === 0 ? '' : ' ') + stringify(e))}]`;
+        if (Array.isArray(data)) return `[${data.map((e, i) => (i === 0 ? '' : ' ') + unlace(e))}]`;
         // Recursive stringify any nested Object literals.
-        else return `{ ${Object.keys(data).map((key, i) => (i === 0 ? '' : ' ') + key + ": " + stringify(data[key]))} }`;
-
-      // Functions have toString() functionality.
-      case 'function': return data.toString();
+        else return `{ ${Object.keys(data).map((key, i) => (i === 0 ? '' : ' ') + key + ": " + unlace(data[key]))} }`;
 
       // Strings need quotes.
       case 'string': return `'${data}'`;
 
-      // All others need not be stringified
-      default: return `${data}`;
+      // All others, including Functions, will be stringified with toString().
+      default: return data.toString();
 
     }
 
 }
 
-module.exports = stringify;
+module.exports = unlace;
