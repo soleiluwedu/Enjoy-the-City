@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const routeCtrl = {
 	redirectHome: (req, res, next) => {
@@ -6,6 +6,6 @@ const routeCtrl = {
 		res.redirect('/');
 		return next();
 	}
-}
+};
 
 module.exports = routeCtrl;
